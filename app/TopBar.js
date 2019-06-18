@@ -2,7 +2,6 @@ import React from 'react'
 import { render } from 'react-dom' // eslint-disable-line no-unused-vars
 
 import Logo from './Logo'
-import LogoTitle from './LogoTitle'
 
 class TopBar extends React.Component {
   _onPeriodChange (event) {
@@ -17,10 +16,7 @@ class TopBar extends React.Component {
     return (
       <div className='c-TopBar'>
         <div className='c-TopBar__inner'>
-          <a href='https://speedtracker.org'>
             <Logo width={40} />
-            <LogoTitle width={140} />
-          </a>
           <div className='c-TopBar__nav'>
             <p>
               Viewing
