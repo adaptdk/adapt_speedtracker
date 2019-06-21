@@ -10,9 +10,7 @@
 }
 
 .c-TopBar__inner {
-  @include dp-wrapper-gutter;
-
-  padding: 6px;
+  padding: 10px;
 }
 
 .c-TopBar__select {
@@ -42,6 +40,6 @@
 
   @include media('>=medium') {
     float: right;
-    margin-top: 8px;
+    margin-top: 20px
   }
 }
