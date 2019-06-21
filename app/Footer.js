@@ -7,7 +7,9 @@ class Footer extends React.Component {
   render () {
     return (
       <footer className='c-Footer'>
-        <div className='c-Footer__inner'/>
+        <div className='c-Footer__inner'>
+          <a href="https://adaptagency.com">https://adaptagency.com</a>
+          </div>
       </footer>
     )
   }
