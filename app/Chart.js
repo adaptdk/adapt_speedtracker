@@ -148,14 +148,14 @@ class Chart extends React.Component {
   }
 
   render () {
-    const placeholderClass = (Object.keys(this.props.results) < 2) ? ' c-Chart--placeholder' : ''
+    const placeholderClass = (Object.keys(this.props.results) < 2) ? ' c-Chart--placeholder' : '';
+    const { footNote } = this.props;
 
     return (
       <div className={`c-Chart${placeholderClass}`}>
         <canvas id={`chart${this.props.id}`} width='400' height='250' />
-
-        {this.props.footNote &&
-          <p className='c-Chart__footer'>{this.props.footNote}</p>
+        {footNote &&
+          <p className='c-Chart__footer'>{footNote}</p>
         }
       </div>
     )

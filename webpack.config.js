@@ -1,6 +1,7 @@
 'use strict'
 
 const webpack = require('webpack')
+const path = require('path')
 
 let config = {
   entry: [
@@ -15,11 +16,15 @@ let config = {
   module: {
     loaders: [
       {
-        loader: 'babel',
+        loader: 'babel-loader',
         exclude: /node_modules/,
-        test: /\.js$/,
+        test: /\.(js|jsx)$/,
         query: {
-          presets: ['es2015', 'es2016', 'react']
+          presets: ['es2015', 'es2016', 'react'],
+          plugins: [
+            'transform-es2015-arrow-functions',
+            'transform-class-properties'
+          ]
         }
       }
     ]

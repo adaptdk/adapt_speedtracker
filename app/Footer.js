@@ -9,7 +9,7 @@ class Footer extends React.Component {
       <footer className='c-Footer'>
         <div className='c-Footer__inner'>
           <a href="https://adaptagency.com">https://adaptagency.com</a>
-          </div>
+        </div>
       </footer>
     )
   }

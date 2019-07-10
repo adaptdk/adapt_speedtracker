@@ -24,19 +24,22 @@
     "babel-preset-es2016": "^6.11.3",
     "babel-preset-react": "^6.11.1",
     "snazzy": "^7.0.0",
-    "standard": "^10.0.1",
-    "webpack": "^1.13.1",
-    "webpack-dev-server": ">=3.1.11"
+    "standard": "^10.0.1"
   },
   "dependencies": {
     "babel-core": "^6.17.0",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-es2015-arrow-functions": "^6.22.0",
     "chart.js": "^2.2.2",
     "es6-promise": "^3.3.1",
     "object-path": "^0.11.2",
     "opencollective": "^1.0.3",
     "query-string": "^4.2.3",
-    "react": "^15.3.1",
-    "react-dom": "^15.3.1",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "semantic-ui-react": "^0.87.3",
+    "webpack": "^1.13.1",
+    "webpack-dev-server": ">=3.1.11",
     "whatwg-fetch": "^1.0.0"
   },
   "collective": {
