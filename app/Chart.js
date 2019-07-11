@@ -9,7 +9,7 @@ import * as Utils from './Utils'
 const objectPath = require('object-path')
 
 class Chart extends React.Component {
-  _initChart () {
+  _initChart = () => {
     const dates = Utils.getDateRangeForPeriod(this.props.period)
     const dateFrom = dates.from.getTime()
     const dateTo = dates.to.getTime()
@@ -148,12 +148,16 @@ class Chart extends React.Component {
   }
 
   render () {
-    const placeholderClass = (Object.keys(this.props.results) < 2) ? ' c-Chart--placeholder' : '';
-    const { footNote } = this.props;
+    const {
+      footNote,
+      results,
+      id
+    } = this.props;
+    const placeholderClass = (Object.keys(results) < 2) ? ' c-Chart--placeholder' : '';
 
     return (
       <div className={`c-Chart${placeholderClass}`}>
-        <canvas id={`chart${this.props.id}`} width='400' height='250' />
+        <canvas id={`chart${id}`} width='400' height='250' />
         {footNote &&
           <p className='c-Chart__footer'>{footNote}</p>
         }

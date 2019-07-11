@@ -4,6 +4,20 @@ const getColor = (color, opacity) => {
   return `rgba(${color[0]}, ${color[1]}, ${color[2]}, ${opacity})`
 }
 
+const formatProfileDropdown = values => {
+  const options = [];
+  
+  values.map(({slug, name}) => {
+    options.push({
+      key: slug,
+      text: name,
+      value: slug
+    })
+  })
+  
+  return options;
+}
+
 const getDateRangeForPeriod = (period) => {
   let currentDate = new Date()
   let pastDate = new Date(currentDate.getTime())
@@ -82,5 +96,6 @@ export {
   getDateRangeForPeriod,
   getVideoFrameURL,
   getTimestampsByInterval,
-  traverseObject
+  traverseObject,
+  formatProfileDropdown
 }
