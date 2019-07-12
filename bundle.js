@@ -571,9 +571,9 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 	var objectPath = __webpack_require__(155);
-	var parseUrl = __webpack_require__(831).parse;
+	var parseUrl = __webpack_require__(832).parse;
 
-	__webpack_require__(833).polyfill();
+	__webpack_require__(834).polyfill();
 
 	var App = function (_React$Component) {
 	  _inherits(App, _React$Component);
@@ -59144,7 +59144,7 @@
 
 	var _semanticUiReact = __webpack_require__(161);
 
-	var _constants = __webpack_require__(835);
+	var _constants = __webpack_require__(831);
 
 	var _Utils = __webpack_require__(154);
 
@@ -105186,10 +105186,37 @@
 
 /***/ }),
 /* 831 */
+/***/ (function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var dropdownPeriod = exports.dropdownPeriod = [{
+	  key: 'day',
+	  text: 'day',
+	  value: 'day'
+	}, {
+	  key: 'week',
+	  text: 'week',
+	  value: 'week'
+	}, {
+	  key: 'month',
+	  text: 'month',
+	  value: 'month'
+	}, {
+	  key: 'year',
+	  text: 'year',
+	  value: 'year'
+	}];
+
+/***/ }),
+/* 832 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
-	var strictUriEncode = __webpack_require__(832);
+	var strictUriEncode = __webpack_require__(833);
 	var objectAssign = __webpack_require__(6);
 
 	function encoderForArrayFormat(opts) {
@@ -105396,7 +105423,7 @@
 
 
 /***/ }),
-/* 832 */
+/* 833 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -105408,7 +105435,7 @@
 
 
 /***/ }),
-/* 833 */
+/* 834 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var require;/* WEBPACK VAR INJECTION */(function(process, global) {/*!
@@ -105543,7 +105570,7 @@
 	function attemptVertx() {
 	  try {
 	    var r = require;
-	    var vertx = __webpack_require__(834);
+	    var vertx = __webpack_require__(835);
 	    vertxNext = vertx.runOnLoop || vertx.runOnContext;
 	    return useVertxTimer();
 	  } catch (e) {
@@ -106568,37 +106595,10 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4), (function() { return this; }())))
 
 /***/ }),
-/* 834 */
-/***/ (function(module, exports) {
-
-	/* (ignored) */
-
-/***/ }),
 /* 835 */
 /***/ (function(module, exports) {
 
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	var dropdownPeriod = exports.dropdownPeriod = [{
-	  key: 'day',
-	  text: 'day',
-	  value: 'day'
-	}, {
-	  key: 'week',
-	  text: 'week',
-	  value: 'week'
-	}, {
-	  key: 'month',
-	  text: 'month',
-	  value: 'month'
-	}, {
-	  key: 'year',
-	  text: 'year',
-	  value: 'year'
-	}];
+	/* (ignored) */
 
 /***/ })
 /******/ ]);

@@ -8,6 +8,16 @@
     text-align: left;
   }
 
+  &__nav {
+    font-size: 15px;
+    margin-top: 20px;
+
+    @include media('>=medium') {
+      float: right;
+      margin-top: 20px
+    }
+  }
+
   &__select-profile, &__select-period {
     -webkit-appearance: none;
     background-color: #43B4BF;
@@ -36,17 +46,8 @@
       width: 80px;
     }
   }
-}
 
-.c-TopBar__inner {
-  padding: 10px;
-}
-
-.c-TopBar__nav {
-  margin-top: 20px;
-
-  @include media('>=medium') {
-    float: right;
-    margin-top: 20px
+  &__inner {
+    padding: 10px;
   }
 }
