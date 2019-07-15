@@ -44,7 +44,7 @@ class Chart extends React.Component {
         backgroundColor: gradient,// Utils.getColor(metric.color, 0.5),
         borderColor: Utils.getColor(metric.color, 1),
         pointBackgroundColor: Utils.getColor(color, 1),
-        pointBorderColor: 'rgb(255, 255, 255)',
+        pointBorderColor: 'rgba(255, 255, 255, 0)',
         pointHoverBorderColor: 'rgb(255, 255, 255)',
         pointBorderWidth: 2,
         pointHoverBorderWidth: 3,
