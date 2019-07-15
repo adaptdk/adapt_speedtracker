@@ -5,6 +5,7 @@ import ChartJS from 'chart.js'
 
 import Constants from './Constants'
 import * as Utils from './Utils'
+import { black } from 'ansi-colors';
 
 const objectPath = require('object-path')
 
@@ -35,7 +36,6 @@ class Chart extends React.Component {
       let bar_ctx = document.getElementById(`chart${this.props.id}`).getContext('2d');
       let gradient = bar_ctx.createLinearGradient(0, 0, 0, 500);
       let { color } = metric;
-      console.log(color[0]);
       gradient.addColorStop(0, `rgba(${color[0]}, ${color[1]}, ${color[2]}, 0.5)`) // show this color at 0%;
       gradient.addColorStop(0.5, `rgba(${color[0]}, ${color[1]}, ${color[2]}, 0.25)`) // show this color at 50%;
       gradient.addColorStop(1, `rgba(${color[0]}, ${color[1]}, ${color[2]}, 0)`) // show this color at 100%;
@@ -43,13 +43,15 @@ class Chart extends React.Component {
       datasets.push({
         backgroundColor: gradient,// Utils.getColor(metric.color, 0.5),
         borderColor: Utils.getColor(metric.color, 1),
-        borderWidth: 1,
+        pointBackgroundColor: Utils.getColor(color, 1),
+        pointBorderColor: 'rgb(255, 255, 255)',
+        pointHoverBorderColor: 'rgb(255, 255, 255)',
+        pointBorderWidth: 2,
+        pointHoverBorderWidth: 3,
         data: values,
         label: metric.name,
-        lineTension: 0.6,
-        pointHoverRadius: 10,
-        pointHitRadius: 10,
-        pointRadius: 5
+        lineTension: 0.5,
+        pointRadius: 4
       })
     })
 
@@ -126,6 +128,9 @@ class Chart extends React.Component {
         tooltips: {
           enabled: true,
           mode: 'label',
+          backgroundColor: 'rgba(255, 255, 255, 0.8)',
+          titleFontColor: 'rgb(0, 0, 0)',
+          bodyFontColor: 'rgb(0, 0, 0)',
           callbacks: {
             title: function (tooltipItems, data) {
               const date = new Date(tooltipItems[0].xLabel)
