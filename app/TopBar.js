@@ -1,7 +1,7 @@
 import React from 'react'
 import { render } from 'react-dom' // eslint-disable-line no-unused-vars
 import { Dropdown } from 'semantic-ui-react'
-import { dropdownPeriod } from './common/constants'
+import { dropdownPeriod } from './Constants'
 import { formatProfileDropdown } from './Utils'
 
 import Logo from './Logo'

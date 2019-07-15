@@ -32,8 +32,16 @@ class Chart extends React.Component {
         return value
       })
 
+      let bar_ctx = document.getElementById(`chart${this.props.id}`).getContext('2d');
+      let gradient = bar_ctx.createLinearGradient(0, 0, 0, 500);
+      let { color } = metric;
+      console.log(color[0]);
+      gradient.addColorStop(0, `rgba(${color[0]}, ${color[1]}, ${color[2]}, 0.5)`) // show this color at 0%;
+      gradient.addColorStop(0.5, `rgba(${color[0]}, ${color[1]}, ${color[2]}, 0.25)`) // show this color at 50%;
+      gradient.addColorStop(1, `rgba(${color[0]}, ${color[1]}, ${color[2]}, 0)`) // show this color at 100%;
+      
       datasets.push({
-        backgroundColor: Utils.getColor(metric.color, 0.5),
+        backgroundColor: gradient,// Utils.getColor(metric.color, 0.5),
         borderColor: Utils.getColor(metric.color, 1),
         borderWidth: 1,
         data: values,
@@ -83,7 +91,6 @@ class Chart extends React.Component {
 
     const labels = timestamps.map(timestamp => timestamp * 1000)
     const target = document.getElementById(`chart${this.props.id}`)
-
     /* eslint-disable no-new */
     new ChartJS(target, {
       type: 'line',

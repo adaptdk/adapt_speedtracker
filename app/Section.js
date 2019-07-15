@@ -9,8 +9,14 @@ const objectPath = require('object-path')
 
 class Section extends React.Component {
   render () {
-    const { metrics, lastResult, title, id, yLabel } = this.props;
-    let budgets = (this.props.profile.budgets || []).filter(budget => (metrics.indexOf(budget.metric) !== -1))
+    const {
+      metrics,
+      lastResult,
+      title,
+      id,
+      yLabel
+    } = this.props;
+    let budgets = (this.props.profile.budgets || []).filter(budget => (metrics.indexOf(budget.metric) !== -1));
 
     return (
       <div className='c-Section'>

@@ -26074,6 +26074,23 @@
 
 	  periods: ['day', 'week', 'month', 'year']
 	};
+	var dropdownPeriod = exports.dropdownPeriod = [{
+	  key: 'day',
+	  text: 'day',
+	  value: 'day'
+	}, {
+	  key: 'week',
+	  text: 'week',
+	  value: 'week'
+	}, {
+	  key: 'month',
+	  text: 'month',
+	  value: 'month'
+	}, {
+	  key: 'year',
+	  text: 'year',
+	  value: 'year'
+	}];
 
 /***/ }),
 /* 20 */
@@ -26523,8 +26540,17 @@
 	          return value;
 	        });
 
+	        var bar_ctx = document.getElementById('chart' + _this.props.id).getContext('2d');
+	        var gradient = bar_ctx.createLinearGradient(0, 0, 0, 500);
+	        var color = metric.color;
+
+	        console.log(color[0]);
+	        gradient.addColorStop(0, 'rgba(' + color[0] + ', ' + color[1] + ', ' + color[2] + ', 0.5)'); // show this color at 0%;
+	        gradient.addColorStop(0.5, 'rgba(' + color[0] + ', ' + color[1] + ', ' + color[2] + ', 0.25)'); // show this color at 50%;
+	        gradient.addColorStop(1, 'rgba(' + color[0] + ', ' + color[1] + ', ' + color[2] + ', 0)'); // show this color at 100%;
+
 	        datasets.push({
-	          backgroundColor: Utils.getColor(metric.color, 0.5),
+	          backgroundColor: gradient, // Utils.getColor(metric.color, 0.5),
 	          borderColor: Utils.getColor(metric.color, 1),
 	          borderWidth: 1,
 	          data: values,
@@ -26576,7 +26602,6 @@
 	        return timestamp * 1000;
 	      });
 	      var target = document.getElementById('chart' + _this.props.id);
-
 	      /* eslint-disable no-new */
 	      new _chart2.default(target, {
 	        type: 'line',
@@ -59144,7 +59169,7 @@
 
 	var _semanticUiReact = __webpack_require__(161);
 
-	var _constants = __webpack_require__(831);
+	var _Constants = __webpack_require__(19);
 
 	var _Utils = __webpack_require__(154);
 
@@ -59218,7 +59243,7 @@
 	            _react2.default.createElement(_semanticUiReact.Dropdown, {
 	              defaultValue: period,
 	              className: 'c-TopBar__select-period',
-	              options: _constants.dropdownPeriod,
+	              options: _Constants.dropdownPeriod,
 	              onChange: this._onPeriodChange
 	            })
 	          )
@@ -105185,33 +105210,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ }),
-/* 831 */
-/***/ (function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	var dropdownPeriod = exports.dropdownPeriod = [{
-	  key: 'day',
-	  text: 'day',
-	  value: 'day'
-	}, {
-	  key: 'week',
-	  text: 'week',
-	  value: 'week'
-	}, {
-	  key: 'month',
-	  text: 'month',
-	  value: 'month'
-	}, {
-	  key: 'year',
-	  text: 'year',
-	  value: 'year'
-	}];
-
-/***/ }),
+/* 831 */,
 /* 832 */
 /***/ (function(module, exports, __webpack_require__) {
 

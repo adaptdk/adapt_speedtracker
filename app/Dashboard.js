@@ -47,7 +47,8 @@ class Dashboard extends React.Component {
 
     return (
       <div className='u-wrapper'>
-        <Section {...this.props}
+        <Section 
+          {...this.props}
           id='loadTimes'
           footNote={(
             <span>Click on a data point to see the corresponding WebPageTest result</span>
