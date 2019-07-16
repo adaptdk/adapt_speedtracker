@@ -631,7 +631,7 @@
 	        period: newPeriod
 	      });
 
-	      window.history.pushSltate(nul, null, '?period=' + newPeriod);
+	      window.history.pushSltate(null, null, '?period=' + newPeriod);
 	    };
 
 	    _this._changeProfile = function (newProfile) {
