@@ -11,7 +11,7 @@
     "build-dev": "webpack -d --mode development",
     "build-prod": "webpack -p --mode production",
     "start": "concurrently \"bundler exec jekyll serve --incremental\" \"webpack-dev-server --hot --mode development\" ",
-    "build": "./node_modules/.bin/webpack | bundle exec jekyll build"
+    "build": "concurrently \"bundle exec jekyll build\" \"webpack\""
   },
   "dependencies": {
     "@babel/plugin-proposal-class-properties": "^7.5.0",
