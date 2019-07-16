@@ -16,7 +16,7 @@ class Section extends React.Component {
       id,
       yLabel
     } = this.props;
-    let budgets = (this.props.profile.budgets || []).filter(budget => (metrics.indexOf(budget.metric) !== -1));
+    const budgets = (this.props.profile.budgets || []).filter(budget => (metrics.indexOf(budget.metric) !== -1));
 
     return (
       <div className='c-Section'>

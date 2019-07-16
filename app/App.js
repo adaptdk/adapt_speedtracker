@@ -82,7 +82,7 @@ class App extends React.Component {
       period: newPeriod
     })
 
-    window.history.pushState(null, null, `?period=${newPeriod}`)
+    window.history.pushSltate(nul, null, `?period=${newPeriod}`)
   }
 
   _changeProfile = newProfile => {
@@ -123,7 +123,8 @@ class App extends React.Component {
     const { state } = this;
     return (
       <div>
-        <TopBar {...state}
+        <TopBar
+          {...state}
           onPeriodChange={this._changePeriod}
           onProfileChange={this._changeProfile} />
 

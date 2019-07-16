@@ -45,103 +45,113 @@ class Dashboard extends React.Component {
       window.open(testUrl, '_blank')
     }
 
+    const { profiles } = this.props;
+    console.log(profiles);
+
     return (
-      <div className='u-wrapper'>
-        <Section 
-          {...this.props}
-          id='loadTimes'
-          footNote={(
-            <span>Click on a data point to see the corresponding WebPageTest result</span>
-          )}
-          lastResult={lastResult}
-          metrics={['TTFB', 'loadTime', 'fullyLoaded']}
-          onClick={onClickWpt}
-          title='Load times'
-          yLabel='Time (seconds)'
-        />
+      <React.Fragment>
+        <div>
+          {profiles.map((item, key) => (
+            <div key={key}>{item.name}</div>
+          ))}
+        </div>
+        <div className='u-wrapper'>
+          <Section 
+            {...this.props}
+            id='loadTimes'
+            footNote={(
+              <span>Click on a data point to see the corresponding WebPageTest result</span>
+            )}
+            lastResult={lastResult}
+            metrics={['TTFB', 'loadTime', 'fullyLoaded']}
+            onClick={onClickWpt}
+            title='Load times'
+            yLabel='Time (seconds)'
+          />
 
-        <Section {...this.props}
-          id='rendering'
-          footNote={(
-            <span>Click on a data point to see the corresponding WebPageTest result</span>
-          )}
-          lastResult={lastResult}
-          onClick={onClickWpt}
-          metrics={['firstPaint', 'SpeedIndex', 'visualComplete']}
-          title='Rendering'
-          yLabel='Time (seconds)'
-        />
+          <Section {...this.props}
+            id='rendering'
+            footNote={(
+              <span>Click on a data point to see the corresponding WebPageTest result</span>
+            )}
+            lastResult={lastResult}
+            onClick={onClickWpt}
+            metrics={['firstPaint', 'SpeedIndex', 'visualComplete']}
+            title='Rendering'
+            yLabel='Time (seconds)'
+          />
 
-        <Section {...this.props}
-          id='pagespeed'
-          footNote={(
-            <span>Click on a data point to see the Google PageSpeed report. Shift+Click to see the Lighthouse report.<br />Not all WebPageTest locations support Lighthouse - <a href='https://speedtracker.org/blog/using-lighthouse'>click here</a> to learn more.</span>
-          )}
-          lastResult={lastResult}
-          maxValue={100}
-          metrics={['pagespeed', 'lighthouse']}
-          onClick={onClickPagespeed}
-          title='Google PageSpeed and Lighthouse'
-          yLabel='Score (0-100)'
-        />
+          <Section {...this.props}
+            id='pagespeed'
+            footNote={(
+              <span>Click on a data point to see the Google PageSpeed report. Shift+Click to see the Lighthouse report.<br />Not all WebPageTest locations support Lighthouse - <a href='https://speedtracker.org/blog/using-lighthouse'>click here</a> to learn more.</span>
+            )}
+            lastResult={lastResult}
+            maxValue={100}
+            metrics={['pagespeed', 'lighthouse']}
+            onClick={onClickPagespeed}
+            title='Google PageSpeed and Lighthouse'
+            yLabel='Score (0-100)'
+          />
 
-        <Section {...this.props}
-          id='contentBreakdownBytes'
-          footNote={(
-            <span>Click on a data point to see the corresponding WebPageTest result</span>
-          )}
-          lastResult={lastResult}
-          onClick={onClickWpt}
-          metrics={[
-            'breakdown.html.bytes',
-            'breakdown.js.bytes',
-            'breakdown.css.bytes',
-            'breakdown.image.bytes',
-            'breakdown.flash.bytes',
-            'breakdown.font.bytes',
-            'breakdown.other.bytes'
-          ]}
-          title='Content breakdown (size)'
-          yLabel='Traffic (kilobytes)'
-        />
+          <Section {...this.props}
+            id='contentBreakdownBytes'
+            footNote={(
+              <span>Click on a data point to see the corresponding WebPageTest result</span>
+            )}
+            lastResult={lastResult}
+            onClick={onClickWpt}
+            metrics={[
+              'breakdown.html.bytes',
+              'breakdown.js.bytes',
+              'breakdown.css.bytes',
+              'breakdown.image.bytes',
+              'breakdown.flash.bytes',
+              'breakdown.font.bytes',
+              'breakdown.other.bytes'
+            ]}
+            title='Content breakdown (size)'
+            yLabel='Traffic (kilobytes)'
+          />
 
-        <Section {...this.props}
-          id='contentBreakdownRequests'
-          footNote={(
-            <span>Click on a data point to see the corresponding WebPageTest result</span>
-          )}
-          lastResult={lastResult}
-          onClick={onClickWpt}
-          metrics={[
-            'breakdown.html.requests',
-            'breakdown.js.requests',
-            'breakdown.css.requests',
-            'breakdown.image.requests',
-            'breakdown.flash.requests',
-            'breakdown.font.requests',
-            'breakdown.other.requests'
-          ]}
-          title='Content breakdown (requests)'
-          yLabel='Requests'
-        />
+          <Section {...this.props}
+            id='contentBreakdownRequests'
+            footNote={(
+              <span>Click on a data point to see the corresponding WebPageTest result</span>
+            )}
+            lastResult={lastResult}
+            onClick={onClickWpt}
+            metrics={[
+              'breakdown.html.requests',
+              'breakdown.js.requests',
+              'breakdown.css.requests',
+              'breakdown.image.requests',
+              'breakdown.flash.requests',
+              'breakdown.font.requests',
+              'breakdown.other.requests'
+            ]}
+            title='Content breakdown (requests)'
+            yLabel='Requests'
+          />
 
-        {videoFrames.length && wptUrl &&
-          <div className='c-Section'>
-            <h3 className='c-Section__title'>Latest filmstrip view</h3>
-            <div className='c-Filmstrip'>
-              {videoFrames.map((frame, index) => {
-                const progress = `${frame._t / 1000}s`
+          {videoFrames.length && wptUrl &&
+            <div className='c-Section'>
+              <h3 className='c-Section__title'>Latest filmstrip view</h3>
+              <div className='c-Filmstrip'>
+                {videoFrames.map((frame, index) => {
+                  const progress = `${frame._t / 1000}s`
 
-                return (
-                  <div key={index} className='c-Filmstrip__item'>
-                    <p className='c-Filmstrip__progress'>{progress} ({frame._vc}%)</p>
-                    <img className='c-Filmstrip__image' src={Utils.getVideoFrameURL(wptUrl, lastResult.id, frame)} />
-                  </div>
-                )
-              })}
-            </div>
-          </div>}
-      </div>
+                  return (
+                    <div key={index} className='c-Filmstrip__item'>
+                      <p className='c-Filmstrip__progress'>{progress} ({frame._vc}%)</p>
+                      <img className='c-Filmstrip__image' src={Utils.getVideoFrameURL(wptUrl, lastResult.id, frame)} />
+                    </div>
+                  )
+                })}
+              </div>
+            </div>}
+        </div>
+      </React.Fragment>
     )
   }
 }

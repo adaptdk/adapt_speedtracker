@@ -21,6 +21,7 @@ class TopBar extends React.Component {
       profiles,
       profile: { slug }
     } = this.props;
+    
     return (
       <div className='c-TopBar'>
         <div className='c-TopBar__inner'>

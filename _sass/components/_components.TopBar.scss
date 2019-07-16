@@ -1,7 +1,6 @@
 .c-TopBar {
-  background-color: #43B4BF;
+  background-color: rgb(235, 235, 235);
   color: white;
-  margin-bottom: 40px;
   text-align: center;
 
   @include media('>=medium') {
