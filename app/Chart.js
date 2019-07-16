@@ -112,6 +112,9 @@ class Chart extends React.Component {
               },
               min: labels[0],
               max: labels[labels.length - 1]
+            },
+            gridLines: {
+              color: "rgba(0, 0, 0, 0)",
             }
           }],
           yAxes: [{
@@ -119,9 +122,8 @@ class Chart extends React.Component {
               beginAtZero: true,
               max: this.props.maxValue
             },
-            scaleLabel: {
-              display: (this.props.yLabel !== undefined),
-              labelString: this.props.yLabel || ''
+            gridLines: {
+              color: "rgba(0, 0, 0, 0)",
             }
           }]
         },

@@ -1,6 +1,7 @@
 .u-wrapper {
   background-color: #F3F2F7;
   padding-top: 40px;
+
   &__nav {
     padding-bottom: 20px;
     font-size: 15px;
@@ -32,6 +33,8 @@
     flex-wrap: wrap;
     justify-content: flex-start;
     align-items: flex-start;
+    max-width: 1600px;
+    margin: auto;
   }
 }
 

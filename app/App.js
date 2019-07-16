@@ -16,7 +16,6 @@ require('es6-promise').polyfill()
 class App extends React.Component {
   constructor (props) {
     super(props)
-
     let activeProfile = window.PROFILES.find(profile => profile.active)
 
     let urlParameters = parseUrl(window.location.search)
