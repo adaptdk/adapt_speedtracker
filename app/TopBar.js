@@ -7,14 +7,6 @@ import { formatProfileDropdown } from './Utils'
 import Logo from './Logo'
 
 class TopBar extends React.Component {
-  _onPeriodChange = (...props) => {
-    this.props.onPeriodChange(props[1].value);
-  }
-
-  _onProfileChange = (...props) => {
-    this.props.onProfileChange(props[1].value);
-  }
-
   render () {
     const { 
       period,
@@ -28,7 +20,7 @@ class TopBar extends React.Component {
           <Logo width={40} />
           <div className='c-TopBar__nav'>
             Viewing
-            <Dropdown className='c-TopBar__select-profile'
+            {/* <Dropdown className='c-TopBar__select-profile'
               defaultValue={slug}
               onChange={this._onProfileChange}
               options={formatProfileDropdown(profiles)}
@@ -38,7 +30,7 @@ class TopBar extends React.Component {
               className='c-TopBar__select-period'
               options={dropdownPeriod}
               onChange={this._onPeriodChange}
-            />
+            /> */}
           </div>
         </div>
       </div>

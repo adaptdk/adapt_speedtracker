@@ -631,7 +631,7 @@
 	        period: newPeriod
 	      });
 
-	      window.history.pushSltate(null, null, '?period=' + newPeriod);
+	      window.history.pushState(null, null, '?period=' + newPeriod);
 	    };
 
 	    _this._changeProfile = function (newProfile) {
@@ -702,8 +702,12 @@
 	        null,
 	        _react2.default.createElement(_TopBar2.default, _extends({}, state, {
 	          onPeriodChange: this._changePeriod,
-	          onProfileChange: this._changeProfile })),
-	        this.state.loading ? _react2.default.createElement(_Loader2.default, null) : _react2.default.createElement(_Dashboard2.default, state),
+	          onProfileChange: this._changeProfile
+	        })),
+	        this.state.loading ? _react2.default.createElement(_Loader2.default, null) : _react2.default.createElement(_Dashboard2.default, _extends({}, state, {
+	          onPeriodChange: this._changePeriod,
+	          onProfileChange: this._changeProfile
+	        })),
 	        _react2.default.createElement(_Footer2.default, null)
 	      );
 	    }
@@ -26133,15 +26137,28 @@
 	var Dashboard = function (_React$Component) {
 	  _inherits(Dashboard, _React$Component);
 
-	  function Dashboard() {
+	  function Dashboard(props) {
 	    _classCallCheck(this, Dashboard);
 
-	    return _possibleConstructorReturn(this, (Dashboard.__proto__ || Object.getPrototypeOf(Dashboard)).apply(this, arguments));
+	    var _this = _possibleConstructorReturn(this, (Dashboard.__proto__ || Object.getPrototypeOf(Dashboard)).call(this, props));
+
+	    _this._onPeriodChange = function (slug) {
+	      _this.props.onPeriodChange(slug);
+	    };
+
+	    _this._onProfileChange = function (slug) {
+	      _this.props.onProfileChange(slug);
+	    };
+
+	    return _this;
 	  }
 
 	  _createClass(Dashboard, [{
 	    key: 'render',
 	    value: function render() {
+	      var _this2 = this;
+
+	      console.log(this.props);
 	      var results = this.props.results;
 	      var dates = Utils.getDateRangeForPeriod(this.props.period);
 	      var dateFrom = dates.from.getTime();
@@ -26181,25 +26198,30 @@
 
 	      var profiles = this.props.profiles;
 
-	      console.log(profiles);
-
+	      var a = '5';
 	      return _react2.default.createElement(
-	        _react2.default.Fragment,
-	        null,
+	        'div',
+	        { className: 'u-wrapper' },
 	        _react2.default.createElement(
-	          'div',
-	          null,
+	          'section',
+	          { className: 'u-wrapper__nav' },
 	          profiles.map(function (item, key) {
 	            return _react2.default.createElement(
-	              'div',
-	              { key: key },
+	              'span',
+	              {
+	                key: key,
+	                name: item.slug,
+	                onClick: function onClick() {
+	                  return _this2._onProfileChange(item.slug);
+	                }
+	              },
 	              item.name
 	            );
 	          })
 	        ),
 	        _react2.default.createElement(
-	          'div',
-	          { className: 'u-wrapper' },
+	          'section',
+	          { className: 'u-wrapper__sections' },
 	          _react2.default.createElement(_Section2.default, _extends({}, this.props, {
 	            id: 'loadTimes',
 	            footNote: _react2.default.createElement(
@@ -59392,29 +59414,9 @@
 	  _inherits(TopBar, _React$Component);
 
 	  function TopBar() {
-	    var _ref;
-
-	    var _temp, _this, _ret;
-
 	    _classCallCheck(this, TopBar);
 
-	    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-	      args[_key] = arguments[_key];
-	    }
-
-	    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = TopBar.__proto__ || Object.getPrototypeOf(TopBar)).call.apply(_ref, [this].concat(args))), _this), _this._onPeriodChange = function () {
-	      for (var _len2 = arguments.length, props = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
-	        props[_key2] = arguments[_key2];
-	      }
-
-	      _this.props.onPeriodChange(props[1].value);
-	    }, _this._onProfileChange = function () {
-	      for (var _len3 = arguments.length, props = Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
-	        props[_key3] = arguments[_key3];
-	      }
-
-	      _this.props.onProfileChange(props[1].value);
-	    }, _temp), _possibleConstructorReturn(_this, _ret);
+	    return _possibleConstructorReturn(this, (TopBar.__proto__ || Object.getPrototypeOf(TopBar)).apply(this, arguments));
 	  }
 
 	  _createClass(TopBar, [{
@@ -59436,19 +59438,7 @@
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'c-TopBar__nav' },
-	            'Viewing',
-	            _react2.default.createElement(_semanticUiReact.Dropdown, { className: 'c-TopBar__select-profile',
-	              defaultValue: slug,
-	              onChange: this._onProfileChange,
-	              options: (0, _Utils.formatProfileDropdown)(profiles)
-	            }),
-	            ' in the last',
-	            _react2.default.createElement(_semanticUiReact.Dropdown, {
-	              defaultValue: period,
-	              className: 'c-TopBar__select-period',
-	              options: _Constants.dropdownPeriod,
-	              onChange: this._onPeriodChange
-	            })
+	            'Viewing'
 	          )
 	        )
 	      );

@@ -5,19 +5,19 @@
   margin: 20px;
   flex-direction: column;
   justify-content: flex-start;
-  margin-top: 80px;
+  margin-bottom: 80px;
   background-color: white;
   border-radius: 10px;
-  box-shadow: 2px 2px 8px #888888;
+  box-shadow: 1px 1px 3px #888888;
 
   &:last-child {
-    min-width: 100%;
-    flex: 0 0 100%;
+    padding: 10px;
+    margin-bottom: unset;
+    flex: 1 1 100%;
   }
 }
 
 .c-Section__title {
-  background-color: #E8E8E8;
   border-radius: 10px;
   color: #43B4BF;
   font-size: 1.6em;
