@@ -9,16 +9,23 @@ const objectPath = require('object-path')
 
 class Section extends React.Component {
   render () {
-    let budgets = (this.props.profile.budgets || []).filter(budget => (this.props.metrics.indexOf(budget.metric) !== -1))
+    const {
+      metrics,
+      lastResult,
+      title,
+      id,
+      yLabel
+    } = this.props;
+    const budgets = (this.props.profile.budgets || []).filter(budget => (metrics.indexOf(budget.metric) !== -1));
 
     return (
       <div className='c-Section'>
-        <h3 className='c-Section__title'>{this.props.title}</h3>
+        <h3 className='c-Section__title'>{title}</h3>
 
         <div className='c-Section__indicators'>
-          {this.props.metrics.map((metricPath, index) => {
+          {metrics.map((metricPath, index) => {
             let metric = objectPath.get(Constants.metrics, metricPath)
-            let value = objectPath.get(this.props.lastResult, metricPath)
+            let value = objectPath.get(lastResult, metricPath)
 
             if (typeof value !== 'undefined') {
               if (typeof metric.transform === 'function') {
@@ -45,7 +52,7 @@ class Section extends React.Component {
 
           {budgets.map((budget, index) => {
             const metric = objectPath.get(Constants.metrics, budget.metric)
-            const value = objectPath.get(this.props.lastResult, budget.metric)
+            const value = objectPath.get(lastResult, budget.metric)
 
             let budgetValue = budget.max || budget.min || 0
             let statusClass = ' c-Indicator--success'
@@ -76,10 +83,13 @@ class Section extends React.Component {
           })}
         </div>
 
-        <Chart {...this.props} id={this.props.id}
+        <Chart 
+          {...this.props} 
+          id={id}
           budgets={budgets}
-          metrics={this.props.metrics}
-          yLabel={this.props.yLabel} />
+          metrics={metrics}
+          yLabel={yLabel} 
+        />
       </div>
     )
   }

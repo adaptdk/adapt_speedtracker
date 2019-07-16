@@ -6,10 +6,13 @@
   flex-direction: column;
   justify-content: flex-start;
   margin-top: 80px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 2px 2px 8px #888888;
 
   &:last-child {
-    min-width: auto;
-    flex: 0 0 auto;
+    min-width: 100%;
+    flex: 0 0 100%;
   }
 }
 

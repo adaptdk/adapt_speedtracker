@@ -34,7 +34,7 @@ class App extends React.Component {
     this.baseUrl = window.BASE_URL || ''
   }
 
-  _fetchData (dateFrom, dateTo) {
+  _fetchData = (dateFrom, dateTo) => {
     let monthFrom = (dateFrom.getFullYear() * 100) + dateFrom.getMonth() + 1
     let monthTo = (dateTo.getFullYear() * 100) + dateTo.getMonth() + 1
 
@@ -77,15 +77,15 @@ class App extends React.Component {
     })
   }
 
-  _changePeriod (newPeriod) {
+  _changePeriod = newPeriod => {
     this.setState({
       period: newPeriod
     })
 
-    window.history.pushState(null, null, `?period=${newPeriod}`)
+    window.history.pushSltate(null, null, `?period=${newPeriod}`)
   }
 
-  _changeProfile (newProfile) {
+  _changeProfile = newProfile => {
     this.setState({
       loading: true
     })
@@ -120,13 +120,15 @@ class App extends React.Component {
   }
 
   render () {
+    const { state } = this;
     return (
       <div>
-        <TopBar {...this.state}
-          onPeriodChange={this._changePeriod.bind(this)}
-          onProfileChange={this._changeProfile.bind(this)} />
+        <TopBar
+          {...state}
+          onPeriodChange={this._changePeriod}
+          onProfileChange={this._changeProfile} />
 
-        {this.state.loading ? <Loader /> : <Dashboard {...this.state} />}
+        {this.state.loading ? <Loader /> : <Dashboard {...state} />}
 
         <Footer />
       </div>

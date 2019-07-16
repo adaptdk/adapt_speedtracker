@@ -5,11 +5,12 @@ import ChartJS from 'chart.js'
 
 import Constants from './Constants'
 import * as Utils from './Utils'
+import { black } from 'ansi-colors';
 
 const objectPath = require('object-path')
 
 class Chart extends React.Component {
-  _initChart () {
+  _initChart = () => {
     const dates = Utils.getDateRangeForPeriod(this.props.period)
     const dateFrom = dates.from.getTime()
     const dateTo = dates.to.getTime()
@@ -32,16 +33,25 @@ class Chart extends React.Component {
         return value
       })
 
+      let bar_ctx = document.getElementById(`chart${this.props.id}`).getContext('2d');
+      let gradient = bar_ctx.createLinearGradient(0, 0, 0, 500);
+      let { color } = metric;
+      gradient.addColorStop(0, `rgba(${color[0]}, ${color[1]}, ${color[2]}, 0.5)`) // show this color at 0%;
+      gradient.addColorStop(0.5, `rgba(${color[0]}, ${color[1]}, ${color[2]}, 0.25)`) // show this color at 50%;
+      gradient.addColorStop(1, `rgba(${color[0]}, ${color[1]}, ${color[2]}, 0)`) // show this color at 100%;
+      
       datasets.push({
-        backgroundColor: Utils.getColor(metric.color, 0.5),
+        backgroundColor: gradient,// Utils.getColor(metric.color, 0.5),
         borderColor: Utils.getColor(metric.color, 1),
-        borderWidth: 1,
+        pointBackgroundColor: Utils.getColor(color, 1),
+        pointBorderColor: 'rgba(255, 255, 255, 0)',
+        pointHoverBorderColor: 'rgb(255, 255, 255)',
+        pointBorderWidth: 2,
+        pointHoverBorderWidth: 3,
         data: values,
         label: metric.name,
-        lineTension: 0.6,
-        pointHoverRadius: 10,
-        pointHitRadius: 10,
-        pointRadius: 5
+        lineTension: 0.5,
+        pointRadius: 4
       })
     })
 
@@ -83,7 +93,6 @@ class Chart extends React.Component {
 
     const labels = timestamps.map(timestamp => timestamp * 1000)
     const target = document.getElementById(`chart${this.props.id}`)
-
     /* eslint-disable no-new */
     new ChartJS(target, {
       type: 'line',
@@ -119,6 +128,9 @@ class Chart extends React.Component {
         tooltips: {
           enabled: true,
           mode: 'label',
+          backgroundColor: 'rgba(255, 255, 255, 0.8)',
+          titleFontColor: 'rgb(0, 0, 0)',
+          bodyFontColor: 'rgb(0, 0, 0)',
           callbacks: {
             title: function (tooltipItems, data) {
               const date = new Date(tooltipItems[0].xLabel)
@@ -148,14 +160,18 @@ class Chart extends React.Component {
   }
 
   render () {
-    const placeholderClass = (Object.keys(this.props.results) < 2) ? ' c-Chart--placeholder' : ''
+    const {
+      footNote,
+      results,
+      id
+    } = this.props;
+    const placeholderClass = (Object.keys(results) < 2) ? ' c-Chart--placeholder' : '';
 
     return (
       <div className={`c-Chart${placeholderClass}`}>
-        <canvas id={`chart${this.props.id}`} width='400' height='250' />
-
-        {this.props.footNote &&
-          <p className='c-Chart__footer'>{this.props.footNote}</p>
+        <canvas id={`chart${id}`} width='400' height='250' />
+        {footNote &&
+          <p className='c-Chart__footer'>{footNote}</p>
         }
       </div>
     )
