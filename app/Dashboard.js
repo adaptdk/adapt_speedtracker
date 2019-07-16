@@ -5,7 +5,22 @@ import Section from './Section'
 import * as Utils from './Utils'
 
 class Dashboard extends React.Component {
+  constructor(props) {
+    super(props);
+
+  }
+
+
+  _onPeriodChange = slug => {
+    this.props.onPeriodChange(slug);
+  }
+
+  _onProfileChange = slug => {
+    this.props.onProfileChange(slug);
+  }
+
   render () {
+    console.log(this.props);
     const results = this.props.results
     const dates = Utils.getDateRangeForPeriod(this.props.period)
     const dateFrom = dates.from.getTime()
@@ -46,16 +61,21 @@ class Dashboard extends React.Component {
     }
 
     const { profiles } = this.props;
-    console.log(profiles);
-
+    let a = '5'
     return (
-      <React.Fragment>
-        <div>
+      <div className='u-wrapper'>
+        <section className='u-wrapper__nav'>
           {profiles.map((item, key) => (
-            <div key={key}>{item.name}</div>
+            <span
+              key={key}
+              name={item.slug}
+              onClick={() => this._onProfileChange(item.slug)}
+            >
+              {item.name}
+            </span>
           ))}
-        </div>
-        <div className='u-wrapper'>
+        </section>
+        <section className='u-wrapper__sections'>
           <Section 
             {...this.props}
             id='loadTimes'
@@ -150,8 +170,8 @@ class Dashboard extends React.Component {
                 })}
               </div>
             </div>}
-        </div>
-      </React.Fragment>
+        </section>
+      </div>
     )
   }
 }
