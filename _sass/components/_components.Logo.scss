@@ -1,12 +1,6 @@
 .c-Logo {
   display: inline-block;
   vertical-align: middle;
-
-  &:hover {
-    .c-Logo__stripe {
-      opacity: 0.3;
-    }
-  }
 }
 
 @keyframes cLogoAnimation {

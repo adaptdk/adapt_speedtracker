@@ -1,16 +1,11 @@
 import React from 'react'
 import { render } from 'react-dom' // eslint-disable-line no-unused-vars
+import { DatePicker } from 'react-datepicker'
 
 import Section from './Section'
 import * as Utils from './Utils'
 
 class Dashboard extends React.Component {
-  constructor(props) {
-    super(props);
-
-  }
-
-
   _onPeriodChange = slug => {
     this.props.onPeriodChange(slug);
   }
@@ -20,7 +15,6 @@ class Dashboard extends React.Component {
   }
 
   render () {
-    console.log(this.props);
     const results = this.props.results
     const dates = Utils.getDateRangeForPeriod(this.props.period)
     const dateFrom = dates.from.getTime()
@@ -60,18 +54,19 @@ class Dashboard extends React.Component {
       window.open(testUrl, '_blank')
     }
 
-    const { profiles } = this.props;
-    let a = '5'
+    const { profiles, profile } = this.props;
+
     return (
       <div className='u-wrapper'>
         <section className='u-wrapper__nav'>
-          {profiles.map((item, key) => (
+          {profiles.map(({slug, name}, key) => (
             <span
               key={key}
-              name={item.slug}
-              onClick={() => this._onProfileChange(item.slug)}
+              className={slug === profile.slug ? 'active': ''}
+              name={slug}
+              onClick={() => this._onProfileChange(slug)}
             >
-              {item.name}
+              {name}
             </span>
           ))}
         </section>
