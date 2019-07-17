@@ -121,9 +121,9 @@ class App extends React.Component {
 
   render() {
     const { state } = this;
-
+    
     return (
-      <div style={brandStyling}>
+      <div style={brandStyling["colors"]}>
         <TopBar
           {...state}
           onPeriodChange={this._changePeriod}
