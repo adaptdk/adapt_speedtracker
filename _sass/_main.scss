@@ -1,9 +1,5 @@
 @import 'config';
 
-body {
-  background-color: $background;
-}
-
 @import 'components/components.Chart';
 @import 'components/components.Filmstrip';
 @import 'components/components.Footer';
