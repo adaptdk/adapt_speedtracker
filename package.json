@@ -10,18 +10,20 @@
     "clean": "rm dist/bundle.js",
     "build-dev": "webpack -d --mode development",
     "build-prod": "webpack -p --mode production",
-    "start": "concurrently \"bundler exec jekyll serve --incremental\" \"webpack-dev-server --hot --mode development\" ",
+    "start": "concurrently \"bundler exec jekyll serve --livereload --incremental\" \"webpack-dev-server --hot --mode development\" ",
     "build": "concurrently \"bundle exec jekyll build\" \"webpack\""
   },
   "dependencies": {
     "@babel/plugin-proposal-class-properties": "^7.5.0",
     "babel-plugin-transform-es2015-arrow-functions": "^6.22.0",
     "chart.js": "^2.8.0",
+    "concurrently": "^4.1.1",
     "es6-promise": "^4.2.8",
     "lodash": "^4.17.14",
     "object-path": "^0.11.4",
     "query-string": "^6.8.1",
     "react": "^16.8.6",
+    "react-datepicker": "^2.8.0",
     "react-dom": "^16.8.6",
     "react-hot-loader": "^4.12.7",
     "semantic-ui-react": "^0.87.3"

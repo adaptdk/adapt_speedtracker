@@ -12,18 +12,21 @@
       color: gray;
       cursor: pointer;
       position: relative;
-      &::after {
-        content: '';
-        position: absolute;
-        bottom: -10px;
-        left: 0;
-        background-color: #866EF7;
-        height: 2px;
-        width: 100%;
+
+      &:hover, &.active {
+        color: black;
       }
 
-      &:hover {
-        color: black;
+      &.active {
+        &::after {
+          content: '';
+          position: absolute;
+          bottom: -10px;
+          left: 0;
+          background-color: #866EF7;
+          height: 2px;
+          width: 100%;
+        }
       }
     }
   }
