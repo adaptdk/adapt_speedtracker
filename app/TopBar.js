@@ -19,7 +19,6 @@ class TopBar extends React.Component {
         <div className='c-TopBar__inner'>
           <Logo width={40} />
           <div className='c-TopBar__nav'>
-            Viewing
             {/* <Dropdown className='c-TopBar__select-profile'
               defaultValue={slug}
               onChange={this._onProfileChange}
