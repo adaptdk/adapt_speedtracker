@@ -8,7 +8,7 @@ import Loader from './Loader'
 import TopBar from './TopBar'
 import * as Utils from './Utils'
 
-import brandStyling from '../style.json'
+import siteSettings from '../site-settings.json'
 
 const objectPath = require('object-path')
 const parseUrl = require('query-string').parse
@@ -108,6 +108,9 @@ class App extends React.Component {
 
   componentDidMount() {
     const dateRange = Utils.getDateRangeForPeriod(this.state.period)
+    
+    document.title = siteSettings['title'];
+
     this._fetchData(dateRange.from, dateRange.to)
   }
 
@@ -123,7 +126,7 @@ class App extends React.Component {
     const { state } = this;
     
     return (
-      <div style={brandStyling["colors"]}>
+      <div style={siteSettings["colors"]}>
         <TopBar
           {...state}
           onPeriodChange={this._changePeriod}
