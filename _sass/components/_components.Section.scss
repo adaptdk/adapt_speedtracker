@@ -1,6 +1,39 @@
-.u-wrapper__sections {
-  display: flex;
-  flex-wrap: wrap;
+.u-wrapper {
+  background-color: $background;
+  padding-top: 40px;
+
+  &__nav {
+    padding-bottom: 20px;
+    font-size: 15px;
+    display: flex;
+
+    span {
+      margin-left: 20px;
+      color: gray;
+      cursor: pointer;
+      position: relative;
+
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: -10px;
+        left: 0;
+        background-color: #866EF7;
+        height: 2px;
+        width: 100%;
+      }
+
+      &:hover {
+        color: black;
+      }
+    }
+  }
+
+  &__sections {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
 }
 
 .c-Section {
