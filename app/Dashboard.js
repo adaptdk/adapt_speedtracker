@@ -76,7 +76,7 @@ class Dashboard extends React.Component {
           ))}
         </section>
         <section className='u-wrapper__sections'>
-          <Section 
+          <Section
             {...this.props}
             id='loadTimes'
             footNote={(

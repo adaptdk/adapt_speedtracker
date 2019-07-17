@@ -8,6 +8,8 @@ import Loader from './Loader'
 import TopBar from './TopBar'
 import * as Utils from './Utils'
 
+import brandStyling from '../style.json'
+
 const objectPath = require('object-path')
 const parseUrl = require('query-string').parse
 
@@ -120,8 +122,10 @@ class App extends React.Component {
 
   render () {
     const { state } = this;
+    console.log(brandStyling);
+
     return (
-      <div>
+      <div style={brandStyling}>
         <TopBar
           {...state}
           onPeriodChange={this._changePeriod}

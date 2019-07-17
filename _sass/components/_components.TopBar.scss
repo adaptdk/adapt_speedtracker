@@ -1,5 +1,5 @@
 .c-TopBar {
-  color: #866EF7;
+  color: $primary;
   margin-bottom: 40px;
   text-align: center;
   max-width: 1600px;
@@ -26,7 +26,7 @@
     background-repeat: no-repeat;
     background-size: 20px;
     border: 0;
-    border-bottom: 2px solid #866EF7;
+    border-bottom: 2px solid $primary;
     border-radius: 0;
     color: inherit;
     font: inherit;

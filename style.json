@@ -1,0 +1,13 @@
+{
+  "--primary": "#866EF7",
+  "--accent": "blue",
+  "--bg-primary": "grey",
+  "--bg-secondary": "lightgrey",
+  "--link": "red",
+  "chartColors" : {
+    "--graph1": "red",
+    "--graph2": "yellow",
+    "--graph3": "green",
+    "--graph4": "blue"
+  }
+}

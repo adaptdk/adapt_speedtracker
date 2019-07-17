@@ -6,7 +6,7 @@
   flex-direction: column;
   justify-content: flex-start;
   padding: 20px;
-  background: #FFFFFF;
+  background: $secondary-background;
   box-shadow: 0 2px 4px 0 rgba(221,221,221,0.50);
   border-radius: 5px;
 
@@ -18,7 +18,7 @@
 }
 
 .c-Section__title {
-  color: #866EF7;
+  color: $primary;
   font-size: 1.6em;
   margin-bottom: dp-spacing('large');
   padding: 10px 20px;

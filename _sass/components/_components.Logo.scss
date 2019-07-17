@@ -2,11 +2,6 @@
   display: inline-block;
   vertical-align: middle;
 
-  background: -webkit-gradient(linear,right top,left top,from(#3cb7c2),to(#564b9b));
-  background: linear-gradient(-90deg,#3cb7c2,#564b9b);
-  -webkit-transition: opacity .2s linear;
-  transition: opacity .2s linear;
-  
   &:hover {
     .c-Logo__stripe {
       opacity: 0.3;
