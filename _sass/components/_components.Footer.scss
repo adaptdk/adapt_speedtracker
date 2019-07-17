@@ -7,18 +7,14 @@
   text-align: center;
 
   a {
-    color: dp-color('accent');
+    color: $accent;
     text-decoration: underline;
   }
 }
 
-.c-Footer__inner {
-  @include dp-wrapper-gutter;
-}
-
 .c-Footer__logo {
   display: inline-block;
-  color: dp-color('accent');
+  color: $accent;
   margin-bottom: 20px;
 }
 

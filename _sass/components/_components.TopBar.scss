@@ -1,53 +1,8 @@
 .c-TopBar {
-  color: #866EF7;
+  color: $primary;
   margin-bottom: 40px;
   text-align: center;
   max-width: 1600px;
   margin: auto;
-
-  @include media('>=medium') {
-    text-align: left;
-  }
-
-  &__nav {
-    font-size: 15px;
-    margin-top: 20px;
-
-    @include media('>=medium') {
-      float: right;
-      margin-top: 20px
-    }
-  }
-
-  &__select-profile, &__select-period {
-    -webkit-appearance: none;
-    background-origin: border-box;
-    background-position: right -5px center;
-    background-repeat: no-repeat;
-    background-size: 20px;
-    border: 0;
-    border-bottom: 2px solid #866EF7;
-    border-radius: 0;
-    color: inherit;
-    font: inherit;
-    margin: 0 8px;
-    outline: 0;
-  }
-
-  &__select-period {
-    > div:first-child {
-      width: 40px;
-    }
-    margin-right: 40px;
-  }
-
-  &__select-profile {
-    > div:first-child {
-      width: 80px;
-    }
-  }
-
-  &__inner {
-    padding: 20px;
-  }
+  padding: 40px;
 }

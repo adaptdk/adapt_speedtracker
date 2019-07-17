@@ -8,12 +8,12 @@ import Logo from './Logo'
 
 class TopBar extends React.Component {
   render () {
-    const { 
+    const {
       period,
       profiles,
       profile: { slug }
     } = this.props;
-    
+
     return (
       <div className='c-TopBar'>
         <div className='c-TopBar__inner'>

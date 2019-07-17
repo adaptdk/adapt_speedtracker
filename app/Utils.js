@@ -6,7 +6,7 @@ const getColor = (color, opacity) => {
 
 const formatProfileDropdown = values => {
   const options = [];
-  
+
   values.map(({slug, name}) => {
     options.push({
       key: slug,
@@ -14,7 +14,7 @@ const formatProfileDropdown = values => {
       value: slug
     })
   })
-  
+
   return options;
 }
 
