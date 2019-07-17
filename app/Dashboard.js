@@ -1,5 +1,4 @@
 import React from 'react'
-import { render } from 'react-dom' // eslint-disable-line no-unused-vars
 import { DatePicker } from 'react-datepicker'
 
 import Section from './Section'

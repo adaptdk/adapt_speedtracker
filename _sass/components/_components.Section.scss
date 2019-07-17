@@ -6,6 +6,8 @@
     padding-bottom: 20px;
     font-size: 15px;
     display: flex;
+    max-width: 1600px;
+    margin: auto;
 
     span {
       margin-left: 20px;
@@ -18,13 +20,22 @@
         position: absolute;
         bottom: -10px;
         left: 0;
-        background-color: #866EF7;
+        background-color: $primary;
+        opacity: 0;
         height: 2px;
         width: 100%;
       }
 
       &:hover {
         color: black;
+      }
+
+      &.active {
+        color: black;
+        
+        &::after {
+          opacity: 1;
+        }
       }
     }
   }
@@ -33,6 +44,8 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
+    max-width: 1600px;
+    margin: auto;
   }
 }
 
@@ -58,7 +71,6 @@
 .c-Section__title {
   color: $primary;
   font-size: 1.6em;
-  padding: 10px 20px;
 }
 
 .c-Section__indicators {
