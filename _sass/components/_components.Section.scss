@@ -1,3 +1,8 @@
+.u-wrapper__sections {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 .c-Section {
   display: flex;
   flex: 1 1 25%;
@@ -6,7 +11,7 @@
   flex-direction: column;
   justify-content: flex-start;
   padding: 20px;
-  background: $secondary-background;
+  background: $background-secondary;
   box-shadow: 0 2px 4px 0 rgba(221,221,221,0.50);
   border-radius: 5px;
 
@@ -20,12 +25,10 @@
 .c-Section__title {
   color: $primary;
   font-size: 1.6em;
-  margin-bottom: dp-spacing('large');
   padding: 10px 20px;
 }
 
 .c-Section__indicators {
-  margin-bottom: dp-spacing('large');
   margin: -10px 0 20px -30px;
   padding: 0 10px;
 

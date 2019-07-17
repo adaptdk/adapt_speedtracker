@@ -12,10 +12,6 @@
   }
 }
 
-.c-Footer__inner {
-  @include dp-wrapper-gutter;
-}
-
 .c-Footer__logo {
   display: inline-block;
   color: $accent;

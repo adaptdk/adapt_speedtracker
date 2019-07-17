@@ -1,8 +1,8 @@
 {
   "--primary": "#866EF7",
   "--accent": "blue",
-  "--bg-primary": "grey",
-  "--bg-secondary": "lightgrey",
+  "--bg-primary": "#F3F2F7",
+  "--bg-secondary": "#fff",
   "--link": "red",
   "chartColors" : {
     "--graph1": "red",
