@@ -9,13 +9,15 @@ import TopBar from './TopBar'
 import * as Utils from './Utils'
 import "react-datepicker/dist/react-datepicker.css";
 
+import siteSettings from '../site-settings.json'
+
 const objectPath = require('object-path')
 const parseUrl = require('query-string').parse
 
 require('es6-promise').polyfill()
 
 class App extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
     let activeProfile = window.PROFILES.find(profile => profile.active)
 
@@ -105,13 +107,15 @@ class App extends React.Component {
     })
   }
 
-  componentDidMount () {
+  componentDidMount() {
     const dateRange = Utils.getDateRangeForPeriod(this.state.period)
+    
+    document.title = siteSettings['title'];
 
     this._fetchData(dateRange.from, dateRange.to)
   }
 
-  componentDidUpdate (oldProps, oldState) {
+  componentDidUpdate(oldProps, oldState) {
     if ((oldState.period !== this.state.period) || (oldState.profile !== this.state.profile)) {
       const dateRange = Utils.getDateRangeForPeriod(this.state.period)
 
@@ -119,27 +123,28 @@ class App extends React.Component {
     }
   }
 
-  render () {
+  render() {
     const { state } = this;
+    
     return (
-      <div>
+      <div style={siteSettings["colors"]}>
         <TopBar
           {...state}
           onPeriodChange={this._changePeriod}
           onProfileChange={this._changeProfile}
         />
 
-          {this.state.loading ? <Loader /> :
-            <Dashboard
-              {...state}
-              onPeriodChange={this._changePeriod}
-              onProfileChange={this._changeProfile}
-            />
-          }
+        {this.state.loading ? <Loader /> :
+          <Dashboard
+            {...state}
+            onPeriodChange={this._changePeriod}
+            onProfileChange={this._changeProfile}
+          />
+        }
         <Footer />
       </div>
     )
   }
 }
 
-render(<App />, document.getElementById('root'))
+render(<App />, document.getElementById('root'));

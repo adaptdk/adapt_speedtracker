@@ -83,12 +83,12 @@ class Section extends React.Component {
           })}
         </div>
 
-        <Chart 
-          {...this.props} 
+        <Chart
+          {...this.props}
           id={id}
           budgets={budgets}
           metrics={metrics}
-          yLabel={yLabel} 
+          yLabel={yLabel}
         />
       </div>
     )

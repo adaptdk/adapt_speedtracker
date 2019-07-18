@@ -39,7 +39,7 @@ class Chart extends React.Component {
       gradient.addColorStop(0, `rgba(${color[0]}, ${color[1]}, ${color[2]}, 0.5)`) // show this color at 0%;
       gradient.addColorStop(0.5, `rgba(${color[0]}, ${color[1]}, ${color[2]}, 0.25)`) // show this color at 50%;
       gradient.addColorStop(1, `rgba(${color[0]}, ${color[1]}, ${color[2]}, 0)`) // show this color at 100%;
-      
+
       datasets.push({
         backgroundColor: gradient,// Utils.getColor(metric.color, 0.5),
         borderColor: Utils.getColor(metric.color, 1),
