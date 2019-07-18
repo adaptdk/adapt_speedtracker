@@ -1,4 +1,5 @@
 import React from 'react'
+import SelectDate from './DatePicker'
 import { DatePicker } from 'react-datepicker'
 
 import Section from './Section'
@@ -68,6 +69,7 @@ class Dashboard extends React.Component {
               {name}
             </span>
           ))}
+         <SelectDate />
         </section>
         <section className='u-wrapper__sections'>
           <Section
