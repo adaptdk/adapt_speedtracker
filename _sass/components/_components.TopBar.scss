@@ -3,26 +3,5 @@
   background: $background;
   text-align: left;
   margin: auto;
-<<<<<<< HEAD
-
-  @include media('>=medium') {
-    text-align: left;
-  }
-
-  &__nav {
-    font-size: 15px;
-    margin-top: 20px;
-
-    @include media('>=medium') {
-      float: right;
-      margin-top: 20px
-    }
-  }
-
-  &__inner {
-    padding: 20px;
-  }
-=======
   padding: 20px;
->>>>>>> master
 }
