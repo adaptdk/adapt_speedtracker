@@ -1,6 +1,6 @@
 import React from 'react'
-import { render } from 'react-dom' // eslint-disable-line no-unused-vars
 import SelectDate from './DatePicker'
+import { DatePicker } from 'react-datepicker'
 
 import Section from './Section'
 import * as Utils from './Utils'
@@ -100,7 +100,7 @@ class Dashboard extends React.Component {
           <Section {...this.props}
             id='pagespeed'
             footNote={(
-              <span>Click on a data point to see the Google PageSpeed report. Shift+Click to see the Lighthouse report.<br />Not all WebPageTest locations support Lighthouse - <a href='https://speedtracker.org/blog/using-lighthouse'>click here</a> to learn more.</span>
+              <span>Click on a data point to see the Google PageSpeed report. <br/>Shift+Click to see the Lighthouse report.</span>
             )}
             lastResult={lastResult}
             maxValue={100}
