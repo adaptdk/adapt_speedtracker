@@ -19,34 +19,6 @@
     }
   }
 
-  &__select-profile, &__select-period {
-    -webkit-appearance: none;
-    background-origin: border-box;
-    background-position: right -5px center;
-    background-repeat: no-repeat;
-    background-size: 20px;
-    border: 0;
-    border-bottom: 2px solid #866EF7;
-    border-radius: 0;
-    color: inherit;
-    font: inherit;
-    margin: 0 8px;
-    outline: 0;
-  }
-
-  &__select-period {
-    > div:first-child {
-      width: 40px;
-    }
-    margin-right: 40px;
-  }
-
-  &__select-profile {
-    > div:first-child {
-      width: 80px;
-    }
-  }
-
   &__inner {
     padding: 20px;
   }

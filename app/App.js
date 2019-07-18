@@ -7,6 +7,7 @@ import Footer from './Footer'
 import Loader from './Loader'
 import TopBar from './TopBar'
 import * as Utils from './Utils'
+import "react-datepicker/dist/react-datepicker.css";
 
 const objectPath = require('object-path')
 const parseUrl = require('query-string').parse

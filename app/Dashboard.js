@@ -1,6 +1,6 @@
 import React from 'react'
 import { render } from 'react-dom' // eslint-disable-line no-unused-vars
-import { DatePicker } from 'react-datepicker'
+import SelectDate from './DatePicker'
 
 import Section from './Section'
 import * as Utils from './Utils'
@@ -69,6 +69,7 @@ class Dashboard extends React.Component {
               {name}
             </span>
           ))}
+         <SelectDate />
         </section>
         <section className='u-wrapper__sections'>
           <Section 
