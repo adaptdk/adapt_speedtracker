@@ -10,7 +10,6 @@ const config = {
       {
         test: /\.(js|jsx)$/,
         use: 'babel-loader',
-<<<<<<< HEAD
         exclude: /node_modules/
       },
       {
@@ -21,11 +20,6 @@ const config = {
         ]
       }
     ]
-=======
-        exclude: /node_modules/,
-      },
-    ],
->>>>>>> master
   },
   resolve: {
     extensions: [
