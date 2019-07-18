@@ -3,5 +3,10 @@
   background: $background;
   text-align: left;
   margin: auto;
-  padding: 20px;
+ 
+  &__inner {
+    max-width: 1600px;
+    margin: auto;
+    padding: 20px; 
+  }
 }
