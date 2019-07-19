@@ -34,7 +34,7 @@ const getDateRangeForPeriod = (period) => {
       pastDate.setFullYear(pastDate.getFullYear() - 1);
       break;
     default:
-      pastDate.setMonth(pastDate.getMonth() - 1);
+      pastDate.setMonth(pastDate.getMonth() - 1); // Needs a change
   }
 
   return {

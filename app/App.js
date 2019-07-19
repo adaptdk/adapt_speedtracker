@@ -18,25 +18,25 @@ require('es6-promise').polyfill()
 
 class App extends React.Component {
   constructor(props) {
-    super(props)
-    let activeProfile = window.PROFILES.find(profile => profile.active)
+    super(props);
+    const activeProfile = window.PROFILES.find(profile => profile.active);
 
-    let urlParameters = parseUrl(window.location.search)
-    let period = Constants.periods.indexOf(urlParameters.period) > -1 ? urlParameters.period : 'week'
+    const urlParameters = parseUrl(window.location.search);
+    const period = Constants.periods.indexOf(urlParameters.period) > -1 ? urlParameters.period : 'week';
 
     this.state = {
       loading: true,
-      period: period,
+      period,
       profile: activeProfile,
       profiles: window.PROFILES,
       results: null,
-      tests: window.TESTS
-    }
+      tests: window.TESTS,
+    };
 
-    this.baseUrl = window.BASE_URL || ''
+    this.baseUrl = window.BASE_URL || '';
   }
 
-  _fetchData = (dateFrom, dateTo) => {
+  _fetchData(dateFrom, dateTo) {
     let monthFrom = (dateFrom.getFullYear() * 100) + dateFrom.getMonth() + 1
     let monthTo = (dateTo.getFullYear() * 100) + dateTo.getMonth() + 1
 
@@ -79,7 +79,7 @@ class App extends React.Component {
     })
   }
 
-  _changePeriod = newPeriod => {
+  _changePeriod(newPeriod) {
     this.setState({
       period: newPeriod
     })
@@ -87,7 +87,7 @@ class App extends React.Component {
     window.history.pushState(null, null, `?period=${newPeriod}`)
   }
 
-  _changeProfile = newProfile => {
+  _changeProfile(newProfile) {
     this.setState({
       loading: true
     })
