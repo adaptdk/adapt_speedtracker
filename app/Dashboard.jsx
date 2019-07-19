@@ -4,8 +4,8 @@ import Section from './Section';
 import * as Utils from './Utils';
 
 class Dashboard extends React.Component {
-  render () {
-    const results = this.props.results
+  render() {
+    const { results } = this.props;
     const dates = Utils.getDateRangeForPeriod(this.props.period);
     const dateFrom = dates.from.getTime();
     const dateTo = dates.to.getTime();

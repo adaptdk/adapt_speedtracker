@@ -1,6 +1,6 @@
-const getColor = (color, opacity) => {
-  return `rgba(${color[0]}, ${color[1]}, ${color[2]}, ${opacity || 1})`;
-};
+const getColor = (color, opacity) => (
+  `rgba(${color[0]}, ${color[1]}, ${color[2]}, ${opacity || 1})`
+);
 
 const formatProfileDropdown = (values) => {
   const options = [];
@@ -40,50 +40,46 @@ const getDateRangeForPeriod = (period) => {
   return {
     from: pastDate,
     to: currentDate,
-  }
-}
-
-const getVideoFrameURL = (baseURL, id, frame) => {
-  baseURL = baseURL || 'https://www.webpagetest.org'
-    // const { _t: t } = frame
-
-  const filename = frame._i || `frame_${leftPad(frame._t / 100, 4)}.jpg`
-
-  return `${baseURL}/getfile.php?test=${id}&video=video_1&file=${filename}`
-}
+  };
+};
 
 const leftPad = (input, length, pad) => {
-  pad = pad || '0'
-
-  let inputStr = input.toString()
-  let lengthDiff = length - inputStr.length
+  const inputStr = input.toString();
+  const lengthDiff = length - inputStr.length;
 
   if (lengthDiff > 0) {
-    return pad.repeat(lengthDiff) + inputStr
+    return (pad || '0').repeat(lengthDiff) + inputStr;
   }
 
-  return inputStr
-}
+  return inputStr;
+};
+
+const getVideoFrameURL = (baseURL, id, frame) => {
+  const { _t: time, _i: name } = frame;
+
+  const filename = name || `frame_${leftPad(time / 100, 4)}.jpg`;
+
+  return `${baseURL || 'https://www.webpagetest.org'}/getfile.php?test=${id}&video=video_1&file=${filename}`;
+};
+
 
 const traverseObject = (obj, callback, path) => {
-  path = path || []
-
   if ((typeof obj === 'object') && !(obj instanceof Array)) {
-    Object.keys(obj).forEach(key => {
-      traverseObject(obj[key], callback, path.concat(key))
-    })
+    Object.keys(obj).forEach((key) => {
+      traverseObject(obj[key], callback, path.concat(key));
+    });
   } else {
-    callback(obj, path)
+    callback(obj, path || []);
   }
-}
+};
 
-const getTimestampsByInterval = (timestamps, dateFrom, dateTo) => {
-  return Object.keys(timestamps).filter(timestamp => {
-    const timestampMillis = timestamp * 1000
+const getTimestampsByInterval = (timestamps, dateFrom, dateTo) => (
+  Object.keys(timestamps).filter((timestamp) => {
+    const timestampMillis = timestamp * 1000;
 
-    return (timestampMillis >= dateFrom) && (timestampMillis <= dateTo)
+    return (timestampMillis >= dateFrom) && (timestampMillis <= dateTo);
   })
-}
+);
 
 export {
   getColor,
@@ -91,5 +87,5 @@ export {
   getVideoFrameURL,
   getTimestampsByInterval,
   traverseObject,
-  formatProfileDropdown
-}
+  formatProfileDropdown,
+};
