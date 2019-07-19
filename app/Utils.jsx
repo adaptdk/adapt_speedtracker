@@ -66,10 +66,10 @@ const getVideoFrameURL = (baseURL, id, frame) => {
 const traverseObject = (obj, callback, path) => {
   if ((typeof obj === 'object') && !(obj instanceof Array)) {
     Object.keys(obj).forEach((key) => {
-      traverseObject(obj[key], callback, path.concat(key));
+      traverseObject(obj[key], callback, (path || []).concat(key));
     });
   } else {
-    callback(obj, path || []);
+    callback(obj, (path || []));
   }
 };
 
