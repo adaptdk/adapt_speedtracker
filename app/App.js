@@ -130,8 +130,6 @@ class App extends React.Component {
       <div style={siteSettings["colors"]}>
         <TopBar
           {...state}
-          onPeriodChange={this._changePeriod}
-          onProfileChange={this._changeProfile}
         />
 
         {this.state.loading ? <Loader /> :
