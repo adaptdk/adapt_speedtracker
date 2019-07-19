@@ -1,28 +1,18 @@
-import React from 'react'
-import SelectDate from './DatePicker'
-import { DatePicker } from 'react-datepicker'
-
-import Section from './Section'
-import * as Utils from './Utils'
+import React from 'react';
+import SelectDate from './DatePicker';
+import Section from './Section';
+import * as Utils from './Utils';
 
 class Dashboard extends React.Component {
-  _onPeriodChange = slug => {
-    this.props.onPeriodChange(slug);
-  }
-
-  _onProfileChange = slug => {
-    this.props.onProfileChange(slug);
-  }
-
   render () {
     const results = this.props.results
-    const dates = Utils.getDateRangeForPeriod(this.props.period)
-    const dateFrom = dates.from.getTime()
-    const dateTo = dates.to.getTime()
-    const timestamps = Utils.getTimestampsByInterval(results, dateFrom, dateTo)
-    const lastTs = timestamps[timestamps.length - 1]
-    const lastResult = results[lastTs]
-    const videoFrames = (lastResult && lastResult.videoFrames) || []
+    const dates = Utils.getDateRangeForPeriod(this.props.period);
+    const dateFrom = dates.from.getTime();
+    const dateTo = dates.to.getTime();
+    const timestamps = Utils.getTimestampsByInterval(results, dateFrom, dateTo);
+    const lastTs = timestamps[timestamps.length - 1];
+    const lastResult = results[lastTs];
+    const videoFrames = (lastResult && lastResult.videoFrames) || [];
     const wptUrl = this.props.profile.wptUrl
       ? (this.props.profile.wptUrl.indexOf('http') === 0 ? this.props.profile.wptUrl : null)
       : 'https://www.webpagetest.org'
@@ -54,51 +44,51 @@ class Dashboard extends React.Component {
       window.open(testUrl, '_blank')
     }
 
-    const { profiles, profile } = this.props;
+    const { profiles, profile, onProfileChange } = this.props;
 
     return (
-      <div className='u-wrapper'>
-        <section className='u-wrapper__nav'>
-          {profiles.map(({slug, name}, key) => (
+      <div className="u-wrapper">
+        <section className="u-wrapper__nav">
+          {profiles.map(({ slug, name }, key) => (
             <span
               key={key}
               className={slug === profile.slug ? 'active': ''}
               name={slug}
-              onClick={() => this._onProfileChange(slug)}
+              onClick={() => onProfileChange(slug)}
             >
               {name}
             </span>
           ))}
          <SelectDate />
         </section>
-        <section className='u-wrapper__sections'>
+        <section className="u-wrapper__sections">
           <Section
             {...this.props}
-            id='loadTimes'
+            id="loadTimes"
             footNote={(
               <span>Click on a data point to see the corresponding WebPageTest result</span>
             )}
             lastResult={lastResult}
             metrics={['TTFB', 'loadTime', 'fullyLoaded']}
             onClick={onClickWpt}
-            title='Load times'
-            yLabel='Time (seconds)'
+            title="Load times"
+            yLabel="Time (seconds)"
           />
 
           <Section {...this.props}
-            id='rendering'
+            id="rendering"
             footNote={(
               <span>Click on a data point to see the corresponding WebPageTest result</span>
             )}
             lastResult={lastResult}
             onClick={onClickWpt}
             metrics={['firstPaint', 'SpeedIndex', 'visualComplete']}
-            title='Rendering'
-            yLabel='Time (seconds)'
+            title="Rendering"
+            yLabel="Time (seconds)"
           />
 
           <Section {...this.props}
-            id='pagespeed'
+            id="pagespeed"
             footNote={(
               <span>Click on a data point to see the Google PageSpeed report. <br/>Shift+Click to see the Lighthouse report.</span>
             )}
@@ -106,12 +96,12 @@ class Dashboard extends React.Component {
             maxValue={100}
             metrics={['pagespeed', 'lighthouse']}
             onClick={onClickPagespeed}
-            title='Google PageSpeed and Lighthouse'
-            yLabel='Score (0-100)'
+            title="Google PageSpeed and Lighthouse"
+            yLabel="Score (0-100)"
           />
 
           <Section {...this.props}
-            id='contentBreakdownBytes'
+            id="contentBreakdownBytes"
             footNote={(
               <span>Click on a data point to see the corresponding WebPageTest result</span>
             )}
@@ -126,12 +116,12 @@ class Dashboard extends React.Component {
               'breakdown.font.bytes',
               'breakdown.other.bytes'
             ]}
-            title='Content breakdown (size)'
-            yLabel='Traffic (kilobytes)'
+            title="Content breakdown (size)"
+            yLabel="Traffic (kilobytes)"
           />
 
           <Section {...this.props}
-            id='contentBreakdownRequests'
+            id="contentBreakdownRequests"
             footNote={(
               <span>Click on a data point to see the corresponding WebPageTest result</span>
             )}
@@ -146,21 +136,22 @@ class Dashboard extends React.Component {
               'breakdown.font.requests',
               'breakdown.other.requests'
             ]}
-            title='Content breakdown (requests)'
-            yLabel='Requests'
+            title="Content breakdown (requests)"
+            yLabel="Requests"
           />
 
           {videoFrames.length && wptUrl &&
-            <div className='c-Section'>
-              <h3 className='c-Section__title'>Latest filmstrip view</h3>
-              <div className='c-Filmstrip'>
+            <div className="c-Section">
+              <h3 className="c-Section__title">Latest filmstrip view</h3>
+              <div className="c-Filmstrip">
                 {videoFrames.map((frame, index) => {
+                  
                   const progress = `${frame._t / 1000}s`
 
                   return (
-                    <div key={index} className='c-Filmstrip__item'>
-                      <p className='c-Filmstrip__progress'>{progress} ({frame._vc}%)</p>
-                      <img className='c-Filmstrip__image' src={Utils.getVideoFrameURL(wptUrl, lastResult.id, frame)} />
+                    <div key={index} className="c-Filmstrip__item">
+                      <p className="c-Filmstrip__progress">{progress} ({frame._vc}%)</p>
+                      <img className="c-Filmstrip__image" src={Utils.getVideoFrameURL(wptUrl, lastResult.id, frame)} />
                     </div>
                   )
                 })}
@@ -172,4 +163,4 @@ class Dashboard extends React.Component {
   }
 }
 
-export default Dashboard
+export default Dashboard;
