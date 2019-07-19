@@ -1,57 +1,51 @@
 const getColor = (color, opacity) => {
-  opacity = opacity || 1
+  return `rgba(${color[0]}, ${color[1]}, ${color[2]}, ${opacity || 1})`;
+};
 
-  return `rgba(${color[0]}, ${color[1]}, ${color[2]}, ${opacity})`
-}
-
-const formatProfileDropdown = values => {
+const formatProfileDropdown = (values) => {
   const options = [];
 
-  values.map(({slug, name}) => {
+  values.forEach(({ slug, name }) => {
     options.push({
       key: slug,
       text: name,
-      value: slug
-    })
-  })
+      value: slug,
+    });
+  });
 
   return options;
-}
+};
 
 const getDateRangeForPeriod = (period) => {
-  let currentDate = new Date()
-  let pastDate = new Date(currentDate.getTime())
+  const currentDate = new Date();
+  const pastDate = new Date(currentDate.getTime());
 
   switch (period) {
     case 'day':
-      pastDate.setDate(pastDate.getDate() - 1)
-
-      break
-
+      pastDate.setDate(pastDate.getDate() - 1);
+      break;
     case 'week':
-      pastDate.setDate(pastDate.getDate() - 7)
-
-      break
-
+      pastDate.setDate(pastDate.getDate() - 7);
+      break;
     case 'month':
-      pastDate.setMonth(pastDate.getMonth() - 1)
-
-      break
-
+      pastDate.setMonth(pastDate.getMonth() - 1);
+      break;
     case 'year':
-      pastDate.setFullYear(pastDate.getFullYear() - 1)
-
-      break
+      pastDate.setFullYear(pastDate.getFullYear() - 1);
+      break;
+    default:
+      pastDate.setMonth(pastDate.getMonth() - 1);
   }
 
   return {
     from: pastDate,
-    to: currentDate
+    to: currentDate,
   }
 }
 
 const getVideoFrameURL = (baseURL, id, frame) => {
   baseURL = baseURL || 'https://www.webpagetest.org'
+    // const { _t: t } = frame
 
   const filename = frame._i || `frame_${leftPad(frame._t / 100, 4)}.jpg`
 
