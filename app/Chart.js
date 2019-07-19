@@ -10,7 +10,7 @@ import { black } from 'ansi-colors';
 const objectPath = require('object-path')
 
 class Chart extends React.Component {
-  _initChart = () => {
+  _initChart() {
     const dates = Utils.getDateRangeForPeriod(this.props.period)
     const dateFrom = dates.from.getTime()
     const dateTo = dates.to.getTime()
