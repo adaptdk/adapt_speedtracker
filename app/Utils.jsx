@@ -81,6 +81,42 @@ const getTimestampsByInterval = (timestamps, dateFrom, dateTo) => (
   })
 );
 
+const formatDashboard = (props) => {
+  const {
+    results,
+    period,
+    profile: { parameters: { url }, wptUrl: wpt },
+  } = props;
+
+  const dates = getDateRangeForPeriod(period);
+  const dateFrom = dates.from.getTime();
+  const dateTo = dates.to.getTime();
+  const timestamps = getTimestampsByInterval(results, dateFrom, dateTo);
+  const lastTs = timestamps[timestamps.length - 1];
+  const lastResult = results[lastTs];
+  const videoFrames = (lastResult && lastResult.videoFrames) || [];
+  let wptUrl = null;
+
+  if (wpt) {
+    if (wpt.indexOf('http') === 0) {
+      wptUrl = wpt;
+    }
+  } else {
+    wptUrl = 'https://www.webpagetest.org';
+  }
+
+  const profileUrl = url;
+
+  return {
+    timestamps,
+    profileUrl,
+    lastResult,
+    wptUrl,
+    videoFrames,
+    results,
+  };
+};
+
 export {
   getColor,
   getDateRangeForPeriod,
@@ -88,4 +124,5 @@ export {
   getTimestampsByInterval,
   traverseObject,
   formatProfileDropdown,
+  formatDashboard,
 };
