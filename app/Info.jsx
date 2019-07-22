@@ -2,12 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 class Info extends React.PureComponent {
-  static get defaultProps() {
-    return {
-      position: 'up',
-    };
-  }
-
   render() {
     const {
       text,
@@ -39,5 +33,8 @@ Info.propTypes = {
   position: PropTypes.string,
 };
 
+Info.defaultProps = {
+  position: 'up',
+};
 
 export default Info;

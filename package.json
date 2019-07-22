@@ -2,7 +2,7 @@
   "name": "adapt_speedtracker",
   "version": "1.0.0",
   "description": "",
-  "main": "app/App.js",
+  "main": "app/App.jsx",
   "keywords": [],
   "author": "",
   "license": "ISC",

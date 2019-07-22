@@ -1,5 +1,5 @@
 const config = {
-  entry: './app/App.js',
+  entry: './app/App.jsx',
   output: {
     path: __dirname,
     publicPath: '/',
