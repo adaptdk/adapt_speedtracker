@@ -48,7 +48,7 @@ class App extends React.Component {
     const { period, profile } = this.state;
     if ((oldState.period !== period) || (oldState.profile !== profile)) {
       const dateRange = Utils.getDateRangeForPeriod(period);
-
+      console.log(dateRange);
       this.fetchData(dateRange.from, dateRange.to);
     }
   }
@@ -98,6 +98,7 @@ class App extends React.Component {
   }
 
   changePeriod = (newPeriod) => {
+    console.log(newPeriod);
     this.setState({
       period: newPeriod,
     });
@@ -106,6 +107,7 @@ class App extends React.Component {
   }
 
   changeProfile = (newProfile) => {
+    console.log(newProfile);
     this.setState({
       loading: true,
     });

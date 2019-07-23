@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import SelectDate from './DatePicker';
+import SelectDate from './SelectDate';
 import Section from './Section';
 import * as Utils from './Utils';
 
@@ -48,6 +48,7 @@ class Dashboard extends React.Component {
       profiles,
       profile,
       onProfileChange,
+      onPeriodChange,
     } = this.props;
 
     const {
@@ -72,7 +73,9 @@ class Dashboard extends React.Component {
               {name}
             </span>
           ))}
-          <SelectDate />
+          <SelectDate
+            onPeriodChange={onPeriodChange}
+          />
         </section>
         <section className="u-wrapper__sections">
           <Section
@@ -207,6 +210,7 @@ Dashboard.propTypes = {
   profiles: PropTypes.array.isRequired,
   profile: PropTypes.object.isRequired,
   onProfileChange: PropTypes.func.isRequired,
+  onPeriodChange: PropTypes.func.isRequired,
 };
 
 export default Dashboard;
