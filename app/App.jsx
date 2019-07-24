@@ -3,7 +3,7 @@ import { render } from 'react-dom';
 import Constants from './Constants';
 import Dashboard from './Dashboard';
 import Footer from './Footer';
-import Loader from './Loader';
+import Loader from './Loader'
 import TopBar from './TopBar';
 import * as Utils from './Utils';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -29,6 +29,8 @@ class App extends React.Component {
       profiles: window.PROFILES,
       results: null,
       tests: window.TESTS,
+      from: undefined,
+      to: undefined,
     };
 
     this.baseUrl = window.BASE_URL || '';
@@ -45,11 +47,11 @@ class App extends React.Component {
   }
 
   componentDidUpdate(oldProps, oldState) {
-    const { period, profile } = this.state;
-    if ((oldState.period !== period) || (oldState.profile !== profile)) {
-      const dateRange = Utils.getDateRangeForPeriod(period);
-      console.log(dateRange);
-      this.fetchData(dateRange.from, dateRange.to);
+    const { from, to, profile } = this.state;
+    if ((oldState.from !== from) || (oldState.to !== to) || (oldState.profile !== profile)) {
+      // const dateRange = Utils.getDateRangeForPeriod(period);
+      console.log(from, to);
+      // this.fetchData(from, to);
     }
   }
 
@@ -97,17 +99,16 @@ class App extends React.Component {
     });
   }
 
-  changePeriod = (newPeriod) => {
-    console.log(newPeriod);
+  changePeriod = (start, end) => {
     this.setState({
-      period: newPeriod,
+      from: start,
+      to: end,
     });
 
     window.history.pushState(null, null, `?period=${newPeriod}`);
   }
 
   changeProfile = (newProfile) => {
-    console.log(newProfile);
     this.setState({
       loading: true,
     });
