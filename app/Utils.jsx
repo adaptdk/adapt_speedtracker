@@ -77,8 +77,8 @@ const traverseObject = (obj, callback, path) => {
 };
 
 const getTimestampsByInterval = (timestamps, dateFrom, dateTo) => (
-  timestamps.filter((timestamp) => {
-    const timestampMillis = timestamp.date * 1000;
+  timestamps.filter(({ date }) => {
+    const timestampMillis = date * 1000;
     return (timestampMillis >= dateFrom) && (timestampMillis <= dateTo);
   })
 );

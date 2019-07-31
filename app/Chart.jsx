@@ -33,12 +33,14 @@ class Chart extends React.Component {
     const timestamps = Utils.getTimestampsByInterval(results, dateFrom, dateTo);
     const datasets = [];
     metrics.forEach((metricPath) => {
-      console.log('metricPath ', metricPath)
       const metric = objectPath.get(Constants.metrics, metricPath);
-      console.log('metric ', metric);
-      const values = timestamps.map((timestamp) => {
-        console.log(timestamp);
-        let value = objectPath.get(results[timestamp], metricPath);
+      const values = timestamps.map(({ date }) => {
+        let value = [];
+        results.forEach((element) => {
+          if (element.date === date) {
+            value = objectPath.get(element, metricPath);
+          }
+        });
 
         if (typeof metric.transform === 'function') {
           value = metric.transform(value);
@@ -46,7 +48,6 @@ class Chart extends React.Component {
 
         return value;
       });
-      console.log(values);
 
       const barCtx = document.getElementById(`chart${id}`).getContext('2d');
       const gradient = barCtx.createLinearGradient(0, 0, 0, 300);
@@ -164,30 +165,19 @@ class Chart extends React.Component {
     //   },
     // });
 
+    const datea = timestamps.map(({ date }) => date);
+    console.log(datea, datasets[1].data);
+
     const ctx = document.getElementById(`chart${id}`).getContext('2d');
     const myChart = new ChartJS(ctx, {
       type: 'bar',
       data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        labels: datea,
         datasets: [{
           label: '# of Votes',
-          data: [12, 19, 3, 5, 2, 3],
-          backgroundColor: [
-            'rgba(255, 99, 132, 0.2)',
-            'rgba(54, 162, 235, 0.2)',
-            'rgba(255, 206, 86, 0.2)',
-            'rgba(75, 192, 192, 0.2)',
-            'rgba(153, 102, 255, 0.2)',
-            'rgba(255, 159, 64, 0.2)',
-          ],
-          borderColor: [
-            'rgba(255, 99, 132, 1)',
-            'rgba(54, 162, 235, 1)',
-            'rgba(255, 206, 86, 1)',
-            'rgba(75, 192, 192, 1)',
-            'rgba(153, 102, 255, 1)',
-            'rgba(255, 159, 64, 1)',
-          ],
+          data: datasets[1].data,
+          backgroundColor: 'rgba(54, 162, 235, 0.2)',
+          borderColor: 'rgba(54, 162, 235, 1)',
           borderWidth: 1,
         }],
       },
