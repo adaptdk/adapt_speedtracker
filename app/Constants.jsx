@@ -150,6 +150,14 @@ export default {
   ],
 };
 
+export const initialDate = () => {
+  const to = new Date();
+  const from = new Date();
+  from.setMonth(from.getMonth() - 1);
+
+  return { to, from };
+};
+
 export const dropdownPeriod = [
   {
     key: 'day',

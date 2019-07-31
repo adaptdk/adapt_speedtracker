@@ -1,37 +1,42 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { addDays } from 'date-fns/esm';
 import DatePicker from 'react-datepicker';
+import { initialDate } from './Constants';
 
 const SelectDate = ({ onPeriodChange }) => {
-  const [startDate, handleChangeStart] = useState(new Date());
-  const [endDate, handleChangeEnd] = useState(addDays(new Date(), 7));
+  const [from, handleChangeStart] = useState(initialDate().from);
+  const [to, handleChangeEnd] = useState(initialDate().to);
+
+
+  const onStartChange = (e) => {
+    onPeriodChange({ from: e, to });
+    handleChangeStart(e);
+  };
+
+  const onEndChange = (e) => {
+    onPeriodChange({ from, to: e });
+    handleChangeEnd(e);
+  };
 
   return (
     <>
       <DatePicker
         dateFormat="dd MM yyyy"
-        selected={startDate}
+        selected={from}
         selectsStart
-        startDate={startDate}
-        endDate={endDate}
-        onChange={(e) => {
-          handleChangeStart(e);
-          onPeriodChange(startDate, endDate);
-        }}
-        maxDate={endDate}
+        startDate={from}
+        endDate={to}
+        onChange={onStartChange}
+        maxDate={to}
       />
       <DatePicker
         dateFormat="dd MM yyyy"
-        selected={endDate}
+        selected={to}
         selectsEnd
-        startDate={startDate}
-        endDate={endDate}
-        onChange={(e) => {
-          handleChangeEnd(e);
-          onPeriodChange(startDate, endDate);
-        }}
-        minDate={startDate}
+        startDate={from}
+        endDate={to}
+        onChange={onEndChange}
+        minDate={from}
         maxDate={new Date()}
       />
     </>

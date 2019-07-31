@@ -16,32 +16,32 @@ const formatProfileDropdown = (values) => {
   return options;
 };
 
-const getDateRangeForPeriod = (period) => {
-  const currentDate = new Date();
-  const pastDate = new Date(currentDate.getTime());
+// const getDateRangeForPeriod = (period) => {
+//   const currentDate = new Date();
+//   const pastDate = new Date(currentDate.getTime());
 
-  switch (period) {
-    case 'day':
-      pastDate.setDate(pastDate.getDate() - 1);
-      break;
-    case 'week':
-      pastDate.setDate(pastDate.getDate() - 7);
-      break;
-    case 'month':
-      pastDate.setMonth(pastDate.getMonth() - 1);
-      break;
-    case 'year':
-      pastDate.setFullYear(pastDate.getFullYear() - 1);
-      break;
-    default:
-      pastDate.setMonth(pastDate.getMonth() - 1); // Needs a change
-  }
+//   switch (period) {
+//     case 'day':
+//       pastDate.setDate(pastDate.getDate() - 1);
+//       break;
+//     case 'week':
+//       pastDate.setDate(pastDate.getDate() - 7);
+//       break;
+//     case 'month':
+//       pastDate.setMonth(pastDate.getMonth() - 1);
+//       break;
+//     case 'year':
+//       pastDate.setFullYear(pastDate.getFullYear() - 1);
+//       break;
+//     default:
+//       pastDate.setMonth(pastDate.getMonth() - 1); // Needs a change
+//   }
 
-  return {
-    from: pastDate,
-    to: currentDate,
-  };
-};
+//   return {
+//     from: pastDate,
+//     to: currentDate,
+//   };
+// };
 
 const leftPad = (input, length, pad) => {
   const inputStr = input.toString();
@@ -55,7 +55,10 @@ const leftPad = (input, length, pad) => {
 };
 
 const getVideoFrameURL = (baseURL, id, frame) => {
-  const { _t: time, _i: name } = frame;
+  const {
+    _t: time,
+    _i: name,
+  } = frame;
 
   const filename = name || `frame_${leftPad(time / 100, 4)}.jpg`;
 
@@ -74,9 +77,8 @@ const traverseObject = (obj, callback, path) => {
 };
 
 const getTimestampsByInterval = (timestamps, dateFrom, dateTo) => (
-  Object.keys(timestamps).filter((timestamp) => {
-    const timestampMillis = timestamp * 1000;
-
+  timestamps.filter((timestamp) => {
+    const timestampMillis = timestamp.date * 1000;
     return (timestampMillis >= dateFrom) && (timestampMillis <= dateTo);
   })
 );
@@ -84,14 +86,13 @@ const getTimestampsByInterval = (timestamps, dateFrom, dateTo) => (
 const formatDashboard = (props) => {
   const {
     results,
-    period,
+    period: { from, to },
     profile: { parameters: { url }, wptUrl: wpt },
   } = props;
-
-  const dates = getDateRangeForPeriod(period);
-  const dateFrom = dates.from.getTime();
-  const dateTo = dates.to.getTime();
-  const timestamps = getTimestampsByInterval(results, dateFrom, dateTo);
+  // const dates = getDateRangeForPeriod(period);
+  // const dateFrom = dates.from.getTime();
+  // const dateTo = dates.to.getTime();
+  const timestamps = getTimestampsByInterval(results, from, to);
   const lastTs = timestamps[timestamps.length - 1];
   const lastResult = results[lastTs];
   const videoFrames = (lastResult && lastResult.videoFrames) || [];
@@ -119,7 +120,7 @@ const formatDashboard = (props) => {
 
 export {
   getColor,
-  getDateRangeForPeriod,
+  // getDateRangeForPeriod,
   getVideoFrameURL,
   getTimestampsByInterval,
   traverseObject,

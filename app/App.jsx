@@ -1,16 +1,16 @@
 import React from 'react';
 import { render } from 'react-dom';
-import Constants from './Constants';
 import Dashboard from './Dashboard';
 import Footer from './Footer';
-import Loader from './Loader'
+import Loader from './Loader';
 import TopBar from './TopBar';
 import * as Utils from './Utils';
+import { initialDate } from './Constants';
 import 'react-datepicker/dist/react-datepicker.css';
 import siteSettings from '../site-settings.json';
+import { Item } from 'semantic-ui-react';
 
 const objectPath = require('object-path');
-const parseUrl = require('query-string').parse;
 
 require('es6-promise').polyfill();
 
@@ -19,45 +19,38 @@ class App extends React.Component {
     super(props);
     const activeProfile = window.PROFILES.find(profile => profile.active);
 
-    const urlParameters = parseUrl(window.location.search);
-    const period = Constants.periods.indexOf(urlParameters.period) > -1 ? urlParameters.period : 'week';
-
     this.state = {
       loading: true,
-      period,
+      period: {
+        from: initialDate().from,
+        to: initialDate().to,
+      },
       profile: activeProfile,
       profiles: window.PROFILES,
-      results: null,
+      results: [],
       tests: window.TESTS,
-      from: undefined,
-      to: undefined,
     };
 
     this.baseUrl = window.BASE_URL || '';
   }
 
   componentDidMount() {
-    const { period } = this.state;
-    const dateRange = Utils.getDateRangeForPeriod(period);
-    const { from, to } = dateRange;
-
+    const { period: { from, to } } = this.state;
     document.title = siteSettings.title;
 
     this.fetchData(from, to);
   }
 
   componentDidUpdate(oldProps, oldState) {
-    const { from, to, profile } = this.state;
-    if ((oldState.from !== from) || (oldState.to !== to) || (oldState.profile !== profile)) {
-      // const dateRange = Utils.getDateRangeForPeriod(period);
-      console.log(from, to);
-      // this.fetchData(from, to);
+    const { period: { from, to }, profile } = this.state;
+    if ((oldState.period.from !== from)
+    || (oldState.period.to !== to) || (oldState.profile !== profile)) {
+      this.fetchData(from, to);
     }
   }
 
   fetchData = (dateFrom, dateTo) => {
     const { tests } = this.state;
-
     const monthFrom = (dateFrom.getFullYear() * 100) + dateFrom.getMonth() + 1;
     const monthTo = (dateTo.getFullYear() * 100) + dateTo.getMonth() + 1;
 
@@ -80,14 +73,12 @@ class App extends React.Component {
     this.setState({
       loading: true,
     });
-
+    const { results } = this.state;
     Promise.all(queue).then((resultChunks) => {
-      const results = {};
-
       resultChunks.forEach(({ _r: r, _ts: ts }) => {
         Utils.traverseObject(r, (obj, path) => {
           obj.forEach((item, index) => {
-            objectPath.set(results, `${ts[index]}.${path.join('.')}`, item);
+            objectPath.set(results, `${index}.${path.join('.')}`, item);
           });
         });
       });
@@ -99,13 +90,12 @@ class App extends React.Component {
     });
   }
 
-  changePeriod = (start, end) => {
+  changePeriod = (newPeriod) => {
     this.setState({
-      from: start,
-      to: end,
+      period: newPeriod,
     });
 
-    window.history.pushState(null, null, `?period=${newPeriod}`);
+    // window.history.pushState(null, null, `?period=${newPeriod}`);
   }
 
   changeProfile = (newProfile) => {
@@ -113,9 +103,7 @@ class App extends React.Component {
       loading: true,
     });
 
-    const { period } = this.state;
-
-    window.history.pushState(null, null, `${this.baseUrl}/${newProfile}/?period=${period}`);
+    window.history.pushState(null, null, `${this.baseUrl}/${newProfile}`);
     window.fetch(`${this.baseUrl}/profiles.json`)
       .then(res => res.json())
       .then((profiles) => {
@@ -133,23 +121,20 @@ class App extends React.Component {
     const {
       state,
     } = this;
-
     const { loading } = state;
 
     return (
       <div style={siteSettings.colors}>
+        { loading
+        && <Loader loading={loading} />}
         <TopBar
           {...state}
         />
-        {loading ? <Loader />
-          : (
-            <Dashboard
-              {...state}
-              onPeriodChange={this.changePeriod}
-              onProfileChange={this.changeProfile}
-            />
-          )
-        }
+        <Dashboard
+          {...state}
+          onPeriodChange={this.changePeriod}
+          onProfileChange={this.changeProfile}
+        />
         <Footer />
       </div>
     );

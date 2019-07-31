@@ -93,7 +93,7 @@ class Dashboard extends React.Component {
             yLabel="Time (seconds)"
           />
 
-          <Section
+          {/* <Section
             {...this.props}
             id="rendering"
             footNote={(
@@ -170,7 +170,7 @@ class Dashboard extends React.Component {
             ]}
             title="Content breakdown (requests)"
             yLabel="Requests"
-          />
+          /> */}
 
           {videoFrames.length && wptUrl
           && (
