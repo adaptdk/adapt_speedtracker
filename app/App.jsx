@@ -64,7 +64,6 @@ class App extends React.Component {
       const month = test.toString().slice(4, 6);
 
       const path = `${this.baseUrl}/results/${profile.slug}/${year}/${month}.json`;
-
       return window.fetch(path).then(response => (
         response.json()
       ));
@@ -74,15 +73,20 @@ class App extends React.Component {
       loading: true,
     });
     const { results } = this.state;
+    let length = 0;
+    let objLength = 0;
     Promise.all(queue).then((resultChunks) => {
-      resultChunks.forEach(({ _r: r, _ts: ts }) => {
+      console.log(resultChunks);
+      resultChunks.forEach(({ _r: r, _ts: ts }, chunkIndex) => {
         Utils.traverseObject(r, (obj, path) => {
+          objLength = obj.length;
           obj.forEach((item, index) => {
-            objectPath.set(results, `${index}.${path.join('.')}`, item);
+            objectPath.set(results, `${length + index}.${path.join('.')}`, item);
           });
         });
+        length += objLength;
       });
-
+      console.log(results);
       this.setState({
         loading: false,
         results,

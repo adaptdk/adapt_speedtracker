@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Line } from 'react-chartjs-2';
+import moment from 'moment';
 import ChartJS from 'chart.js';
 import Constants from './Constants';
 import * as Utils from './Utils';
@@ -7,18 +9,52 @@ import * as Utils from './Utils';
 const objectPath = require('object-path');
 
 class Chart extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      datasets: [],
+      labels: [],
+      options: {
+        tooltips: {
+          caretSize: 0,
+          titleFontSize: 15,
+          bodyFontSize: 14,
+          position: 'nearest',
+          mode: 'index',
+          backgroundColor: 'rgba(255, 255, 255, 0.9)',
+          titleFontColor: 'rgb(0, 0, 0)',
+          bodyFontColor: 'rgb(0, 0, 0)',
+        },
+        scales: {
+          xAxes: [{
+            ticks: {
+              display: false,
+            },
+            gridLines: {
+              display: false,
+            },
+          }],
+          yAxes: [{
+            gridLines: {
+              display: false,
+            },
+          }],
+        },
+      },
+    };
+  }
 
   componentDidMount() {
-    this.initChart();
+    this.initChart(this.props);
   }
 
-  componentDidUpdate() {
-    // this.state.chart.destroy();
-    this.initChart();
+  componentWillReceiveProps(nextProps) {
+    this.initChart(nextProps);
   }
 
 
-  initChart() {
+  initChart = (nextProps) => {
     const {
       id,
       // budgets,
@@ -27,10 +63,14 @@ class Chart extends React.Component {
       period: { from, to },
       results,
       metrics,
-    } = this.props;
+    } = nextProps;
     const dateFrom = from.getTime();
     const dateTo = to.getTime();
+
     const timestamps = Utils.getTimestampsByInterval(results, dateFrom, dateTo);
+    const labels = timestamps.map(({ date }) => (
+      moment(new Date(date * 1000)).format('MMMM Do YYYY, kk:mm')
+    ));
     const datasets = [];
     metrics.forEach((metricPath) => {
       const metric = objectPath.get(Constants.metrics, metricPath);
@@ -48,13 +88,13 @@ class Chart extends React.Component {
 
         return value;
       });
-
       const barCtx = document.getElementById(`chart${id}`).getContext('2d');
-      const gradient = barCtx.createLinearGradient(0, 0, 0, 300);
+      const gradient = barCtx.createLinearGradient(0, 0, 0, barCtx.canvas.height);
       const { color } = metric;
       gradient.addColorStop(0, `rgba(${color[0]}, ${color[1]}, ${color[2]}, 0.5)`); // show this color at 0%;
       gradient.addColorStop(0.5, `rgba(${color[0]}, ${color[1]}, ${color[2]}, 0.25)`); // show this color at 50%;
       gradient.addColorStop(1, `rgba(${color[0]}, ${color[1]}, ${color[2]}, 0)`); // show this color at 100%;
+
       datasets.push({
         backgroundColor: gradient, // Utils.getColor(metric.color, 0.5),
         borderColor: Utils.getColor(metric.color, 1),
@@ -69,43 +109,10 @@ class Chart extends React.Component {
         pointRadius: 4,
       });
     });
-
-    // const lineChart = ChartJS.controllers.line.prototype.draw;
-
-    // ChartJS.helpers.extend(ChartJS.controllers.line.prototype, {
-    //   draw(...args) {
-    //     lineChart.apply(this, args);
-
-    //     const { chart: { chart: { ctx } }, chart } = this;
-
-    //     const lineStart = chart.scales['x-axis-0'].left;
-    //     const lineEnd = lineStart + chart.scales['x-axis-0'].width;
-
-    //     chart.config.data.budgets.forEach((budget) => {
-    //       const metric = objectPath.get(Constants.metrics, budget.metric);
-    //       let value = budget.max || budget.min;
-
-    //       if (value) {
-    //         if (typeof metric.transform === 'function') {
-    //           value = metric.transform(value);
-    //         }
-
-    //         const yValue = chart.scales['y-axis-0'].getPixelForValue(value);
-
-    //         ctx.save();
-    //         ctx.beginPath();
-    //         ctx.moveTo(lineStart, yValue);
-    //         ctx.strokeStyle = '#ff0000';
-    //         ctx.lineTo(lineEnd, yValue);
-    //         ctx.stroke();
-
-    //         ctx.restore();
-    //       }
-    //     });
-    //   },
-    // });
-
-    // const labels = timestamps.map(timestamp => timestamp * 1000);
+    this.setState({
+      datasets,
+      labels,
+    });
     // const target = document.getElementById(`chart${id}`).getContext('2d');
     // /* eslint-disable no-new */
     // const chart = new ChartJS(target, {
@@ -164,46 +171,27 @@ class Chart extends React.Component {
     //     },
     //   },
     // });
-
-    const datea = timestamps.map(({ date }) => date);
-    console.log(datea, datasets[1].data);
-
-    const ctx = document.getElementById(`chart${id}`).getContext('2d');
-    const myChart = new ChartJS(ctx, {
-      type: 'bar',
-      data: {
-        labels: datea,
-        datasets: [{
-          label: '# of Votes',
-          data: datasets[1].data,
-          backgroundColor: 'rgba(54, 162, 235, 0.2)',
-          borderColor: 'rgba(54, 162, 235, 1)',
-          borderWidth: 1,
-        }],
-      },
-      options: {
-        scales: {
-          yAxes: [{
-            ticks: {
-              beginAtZero: true,
-            },
-          }],
-        },
-      },
-    });
   }
 
   render() {
     const {
       footNote,
-      results,
       id,
+      results,
     } = this.props;
-    const placeholderClass = '';// (Object.keys(results) < 2) ? ' c-Chart--placeholder' : '';
+    const { labels, datasets, options } = this.state;
+    const placeholderClass = (Object.keys(results) < 2) ? ' c-Chart--placeholder' : '';
 
     return (
       <div className={`c-Chart${placeholderClass}`}>
-        <canvas id={`chart${id}`} width="400" height="250" />
+        <Line
+          id={`chart${id}`}
+          data={{
+            datasets,
+            labels,
+          }}
+          options={options}
+        />
         {
           footNote
           && <p className="c-Chart__footer">{footNote}</p>

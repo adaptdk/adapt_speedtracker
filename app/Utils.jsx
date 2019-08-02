@@ -89,10 +89,9 @@ const formatDashboard = (props) => {
     period: { from, to },
     profile: { parameters: { url }, wptUrl: wpt },
   } = props;
-  // const dates = getDateRangeForPeriod(period);
-  // const dateFrom = dates.from.getTime();
-  // const dateTo = dates.to.getTime();
-  const timestamps = getTimestampsByInterval(results, from, to);
+  const dateFrom = from.getTime();
+  const dateTo = to.getTime();
+  const timestamps = getTimestampsByInterval(results, dateFrom, dateTo);
   const lastTs = timestamps[timestamps.length - 1];
   const lastResult = results[lastTs];
   const videoFrames = (lastResult && lastResult.videoFrames) || [];
