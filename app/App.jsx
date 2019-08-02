@@ -76,7 +76,6 @@ class App extends React.Component {
     let length = 0;
     let objLength = 0;
     Promise.all(queue).then((resultChunks) => {
-      console.log(resultChunks);
       resultChunks.forEach(({ _r: r, _ts: ts }, chunkIndex) => {
         Utils.traverseObject(r, (obj, path) => {
           objLength = obj.length;
@@ -86,7 +85,6 @@ class App extends React.Component {
         });
         length += objLength;
       });
-      console.log(results);
       this.setState({
         loading: false,
         results,

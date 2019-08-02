@@ -10,12 +10,14 @@ const objectPath = require('object-path');
 
 class Chart extends React.Component {
   constructor(props) {
+    console.log(props);
     super(props);
 
     this.state = {
       datasets: [],
       labels: [],
       options: {
+        onClick: props.onClick,
         tooltips: {
           caretSize: 0,
           titleFontSize: 15,
@@ -40,6 +42,9 @@ class Chart extends React.Component {
               display: false,
             },
           }],
+        },
+        legend: {
+          display: !(props.metrics.length < 2),
         },
       },
     };
@@ -68,13 +73,13 @@ class Chart extends React.Component {
     const dateTo = to.getTime();
 
     const timestamps = Utils.getTimestampsByInterval(results, dateFrom, dateTo);
-    const labels = timestamps.map(({ date }) => (
+    const labels = timestamps.map(date => (
       moment(new Date(date * 1000)).format('MMMM Do YYYY, kk:mm')
     ));
     const datasets = [];
     metrics.forEach((metricPath) => {
       const metric = objectPath.get(Constants.metrics, metricPath);
-      const values = timestamps.map(({ date }) => {
+      const values = timestamps.map((date) => {
         let value = [];
         results.forEach((element) => {
           if (element.date === date) {

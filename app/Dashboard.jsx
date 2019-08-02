@@ -14,7 +14,7 @@ class Dashboard extends React.Component {
 
     const { _index: index } = data[0];
     const timestamp = timestamps[index];
-    const result = results[timestamp];
+    const result = this.getResult(results, timestamp)[0];
     const encodedUrl = encodeURIComponent(profileUrl);
     const insightsUrl = `https://developers.google.com/speed/pagespeed/insights/?url=${encodedUrl}`;
     const lighthouseUrl = `https://www.webpagetest.org/lighthouse.php?test=${result.id}`;
@@ -32,16 +32,23 @@ class Dashboard extends React.Component {
       timestamps,
       wptUrl,
     } = Utils.formatDashboard(this.props);
-
     if (!data.length || !wptUrl) return;
 
     const { _index: index } = data[0];
     const timestamp = timestamps[index];
-    const result = results[timestamp];
+    const result = this.getResult(results, timestamp)[0];
     const testUrl = `${wptUrl}/result/${result.id}/`;
 
     window.open(testUrl, '_blank');
   }
+
+  getResult = (results, timestamp) => (
+    results
+      .filter(({ date }) => (
+        (date === timestamp)
+      ))
+      .map(obj => obj)
+  )
 
   render() {
     const {
@@ -92,6 +99,23 @@ class Dashboard extends React.Component {
             title="Load times"
             yLabel="Time (seconds)"
           />
+          <Section
+            {...this.props}
+            id="pagespeed"
+            footNote={(
+              <span>
+                Click on a data point to see the Google PageSpeed report.
+                <br />
+                Shift+Click to see the Lighthouse report.
+              </span>
+            )}
+            lastResult={lastResult}
+            maxValue={100}
+            metrics={['lighthouse']}
+            onClick={this.onClickPagespeed}
+            title="Google PageSpeed and Lighthouse"
+            yLabel="Score (0-100)"
+          />
 
           {/* <Section
             {...this.props}
@@ -106,24 +130,6 @@ class Dashboard extends React.Component {
             metrics={['firstPaint', 'SpeedIndex', 'visualComplete']}
             title="Rendering"
             yLabel="Time (seconds)"
-          />
-
-          <Section
-            {...this.props}
-            id="pagespeed"
-            footNote={(
-              <span>
-                Click on a data point to see the Google PageSpeed report.
-                <br />
-                Shift+Click to see the Lighthouse report.
-              </span>
-            )}
-            lastResult={lastResult}
-            maxValue={100}
-            metrics={['pagespeed', 'lighthouse']}
-            onClick={this.onClickPagespeed}
-            title="Google PageSpeed and Lighthouse"
-            yLabel="Score (0-100)"
           />
 
           <Section

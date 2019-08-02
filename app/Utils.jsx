@@ -77,10 +77,12 @@ const traverseObject = (obj, callback, path) => {
 };
 
 const getTimestampsByInterval = (timestamps, dateFrom, dateTo) => (
-  timestamps.filter(({ date }) => {
-    const timestampMillis = date * 1000;
-    return (timestampMillis >= dateFrom) && (timestampMillis <= dateTo);
-  })
+  timestamps
+    .filter(({ date }) => {
+      const timestampMillis = date * 1000;
+      return ((timestampMillis >= dateFrom) && (timestampMillis <= dateTo))
+    })
+    .map(({ date }) => date)
 );
 
 const formatDashboard = (props) => {
@@ -93,7 +95,10 @@ const formatDashboard = (props) => {
   const dateTo = to.getTime();
   const timestamps = getTimestampsByInterval(results, dateFrom, dateTo);
   const lastTs = timestamps[timestamps.length - 1];
-  const lastResult = results[lastTs];
+  let lastResult = {};
+  results.forEach((obj) => {
+    if (obj.date === lastTs) lastResult = obj;
+  });
   const videoFrames = (lastResult && lastResult.videoFrames) || [];
   let wptUrl = null;
 
