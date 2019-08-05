@@ -151,32 +151,49 @@ export default {
 };
 
 export const initialDate = () => {
-  const to = new Date();
   const from = new Date();
+  from.setHours(0, 0, 0, 0);
   from.setMonth(from.getMonth() - 1);
+  const to = new Date();
+  to.setHours(23, 59, 59, 999);
 
   return { to, from };
 };
 
-export const dropdownPeriod = [
-  {
-    key: 'day',
-    text: 'day',
-    value: 'day',
-  },
-  {
-    key: 'week',
-    text: 'week',
-    value: 'week',
-  },
-  {
-    key: 'month',
-    text: 'month',
-    value: 'month',
-  },
-  {
-    key: 'year',
-    text: 'year',
-    value: 'year',
-  },
-];
+export const chartOptions = (props) => {
+  const { onClick, metrics } = props;
+
+  const options = {
+    onClick,
+    tooltips: {
+      caretSize: 0,
+      titleFontSize: 15,
+      bodyFontSize: 14,
+      position: 'nearest',
+      mode: 'index',
+      backgroundColor: 'rgba(255, 255, 255, 0.9)',
+      titleFontColor: 'rgb(0, 0, 0)',
+      bodyFontColor: 'rgb(0, 0, 0)',
+    },
+    scales: {
+      xAxes: [{
+        ticks: {
+          display: false,
+        },
+        gridLines: {
+          display: false,
+        },
+      }],
+      yAxes: [{
+        gridLines: {
+          display: false,
+        },
+      }],
+    },
+    legend: {
+      display: !(metrics.length < 2),
+    },
+  };
+
+  return options;
+};

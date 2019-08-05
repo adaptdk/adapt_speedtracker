@@ -100,11 +100,15 @@ const Section = ({
 
 Section.propTypes = {
   metrics: PropTypes.array.isRequired,
-  lastResult: PropTypes.object.isRequired,
+  lastResult: PropTypes.object,
   title: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
   yLabel: PropTypes.string.isRequired,
   profile: PropTypes.object.isRequired,
+};
+
+Section.defaultProps = {
+  lastResult: {},
 };
 
 export default Section;

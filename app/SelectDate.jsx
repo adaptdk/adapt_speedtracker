@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import DatePicker from 'react-datepicker';
 import { initialDate } from './Constants';
@@ -7,19 +7,20 @@ const SelectDate = ({ onPeriodChange }) => {
   const [from, handleChangeStart] = useState(initialDate().from);
   const [to, handleChangeEnd] = useState(initialDate().to);
 
+  useEffect(() => {
+    onPeriodChange({ from, to });
+  }, [from, to]);
 
   const onStartChange = (e) => {
-    onPeriodChange({ from: e, to });
     handleChangeStart(e);
   };
 
   const onEndChange = (e) => {
-    onPeriodChange({ from, to: e });
     handleChangeEnd(e);
   };
 
   return (
-    <>
+    <div className="c-Datepicker">
       <DatePicker
         dateFormat="dd MM yyyy"
         selected={from}
@@ -39,7 +40,7 @@ const SelectDate = ({ onPeriodChange }) => {
         minDate={from}
         maxDate={new Date()}
       />
-    </>
+    </div>
   );
 };
 

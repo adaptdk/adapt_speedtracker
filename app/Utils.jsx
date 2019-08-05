@@ -16,33 +16,6 @@ const formatProfileDropdown = (values) => {
   return options;
 };
 
-// const getDateRangeForPeriod = (period) => {
-//   const currentDate = new Date();
-//   const pastDate = new Date(currentDate.getTime());
-
-//   switch (period) {
-//     case 'day':
-//       pastDate.setDate(pastDate.getDate() - 1);
-//       break;
-//     case 'week':
-//       pastDate.setDate(pastDate.getDate() - 7);
-//       break;
-//     case 'month':
-//       pastDate.setMonth(pastDate.getMonth() - 1);
-//       break;
-//     case 'year':
-//       pastDate.setFullYear(pastDate.getFullYear() - 1);
-//       break;
-//     default:
-//       pastDate.setMonth(pastDate.getMonth() - 1); // Needs a change
-//   }
-
-//   return {
-//     from: pastDate,
-//     to: currentDate,
-//   };
-// };
-
 const leftPad = (input, length, pad) => {
   const inputStr = input.toString();
   const lengthDiff = length - inputStr.length;
@@ -80,7 +53,7 @@ const getTimestampsByInterval = (timestamps, dateFrom, dateTo) => (
   timestamps
     .filter(({ date }) => {
       const timestampMillis = date * 1000;
-      return ((timestampMillis >= dateFrom) && (timestampMillis <= dateTo))
+      return ((timestampMillis >= dateFrom) && (timestampMillis <= dateTo));
     })
     .map(({ date }) => date)
 );
@@ -95,10 +68,9 @@ const formatDashboard = (props) => {
   const dateTo = to.getTime();
   const timestamps = getTimestampsByInterval(results, dateFrom, dateTo);
   const lastTs = timestamps[timestamps.length - 1];
-  let lastResult = {};
-  results.forEach((obj) => {
-    if (obj.date === lastTs) lastResult = obj;
-  });
+  const lastResult = results.find(obj => (
+    obj.date === lastTs
+  ));
   const videoFrames = (lastResult && lastResult.videoFrames) || [];
   let wptUrl = null;
 
@@ -124,7 +96,6 @@ const formatDashboard = (props) => {
 
 export {
   getColor,
-  // getDateRangeForPeriod,
   getVideoFrameURL,
   getTimestampsByInterval,
   traverseObject,

@@ -8,7 +8,6 @@ import * as Utils from './Utils';
 import { initialDate } from './Constants';
 import 'react-datepicker/dist/react-datepicker.css';
 import siteSettings from '../site-settings.json';
-import { Item } from 'semantic-ui-react';
 
 const objectPath = require('object-path');
 
@@ -72,13 +71,13 @@ class App extends React.Component {
     this.setState({
       loading: true,
     });
-    const { results } = this.state;
+    const results = [];
     let length = 0;
     let objLength = 0;
     Promise.all(queue).then((resultChunks) => {
-      resultChunks.forEach(({ _r: r, _ts: ts }, chunkIndex) => {
+      resultChunks.forEach(({ _r: r }) => {
         Utils.traverseObject(r, (obj, path) => {
-          objLength = obj.length;
+          objLength = obj.length; // Should find the largest length
           obj.forEach((item, index) => {
             objectPath.set(results, `${length + index}.${path.join('.')}`, item);
           });
@@ -96,8 +95,6 @@ class App extends React.Component {
     this.setState({
       period: newPeriod,
     });
-
-    // window.history.pushState(null, null, `?period=${newPeriod}`);
   }
 
   changeProfile = (newProfile) => {

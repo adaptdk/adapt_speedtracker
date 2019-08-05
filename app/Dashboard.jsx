@@ -67,19 +67,21 @@ class Dashboard extends React.Component {
     return (
       <div className="u-wrapper">
         <section className="u-wrapper__nav">
-          {profiles.map(({ slug, name }) => (
-            <span
-              key={slug}
-              role="button"
-              tabIndex={0}
-              className={slug === profile.slug ? 'active' : ''}
-              name={slug}
-              onClick={() => onProfileChange(slug)}
-              onKeyPress={() => onProfileChange(slug)}
-            >
-              {name}
-            </span>
-          ))}
+          <div>
+            {profiles.map(({ slug, name }) => (
+              <span
+                key={slug}
+                role="button"
+                tabIndex={0}
+                className={slug === profile.slug ? 'active' : ''}
+                name={slug}
+                onClick={() => onProfileChange(slug)}
+                onKeyPress={() => onProfileChange(slug)}
+              >
+                {name}
+              </span>
+            ))}
+          </div>
           <SelectDate
             onPeriodChange={onPeriodChange}
           />
@@ -101,6 +103,20 @@ class Dashboard extends React.Component {
           />
           <Section
             {...this.props}
+            id="rendering"
+            footNote={(
+              <span>
+                Click on a data point to see the corresponding WebPageTest result
+              </span>
+            )}
+            lastResult={lastResult}
+            onClick={this.onClickWpt}
+            metrics={['firstPaint', 'SpeedIndex', 'visualComplete']}
+            title="Rendering"
+            yLabel="Time (seconds)"
+          />
+          <Section
+            {...this.props}
             id="pagespeed"
             footNote={(
               <span>
@@ -116,22 +132,6 @@ class Dashboard extends React.Component {
             title="Google PageSpeed and Lighthouse"
             yLabel="Score (0-100)"
           />
-
-          {/* <Section
-            {...this.props}
-            id="rendering"
-            footNote={(
-              <span>
-                Click on a data point to see the corresponding WebPageTest result
-              </span>
-            )}
-            lastResult={lastResult}
-            onClick={this.onClickWpt}
-            metrics={['firstPaint', 'SpeedIndex', 'visualComplete']}
-            title="Rendering"
-            yLabel="Time (seconds)"
-          />
-
           <Section
             {...this.props}
             id="contentBreakdownBytes"
@@ -154,7 +154,6 @@ class Dashboard extends React.Component {
             title="Content breakdown (size)"
             yLabel="Traffic (kilobytes)"
           />
-
           <Section
             {...this.props}
             id="contentBreakdownRequests"
@@ -176,8 +175,7 @@ class Dashboard extends React.Component {
             ]}
             title="Content breakdown (requests)"
             yLabel="Requests"
-          /> */}
-
+          />
           {videoFrames.length && wptUrl
           && (
             <div className="c-Section">
