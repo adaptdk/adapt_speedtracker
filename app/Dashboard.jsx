@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import SelectDate from './DatePicker';
+import SelectDate from './SelectDate';
 import Section from './Section';
 import * as Utils from './Utils';
 
@@ -14,7 +14,7 @@ class Dashboard extends React.Component {
 
     const { _index: index } = data[0];
     const timestamp = timestamps[index];
-    const result = results[timestamp];
+    const result = this.getResult(results, timestamp)[0];
     const encodedUrl = encodeURIComponent(profileUrl);
     const insightsUrl = `https://developers.google.com/speed/pagespeed/insights/?url=${encodedUrl}`;
     const lighthouseUrl = `https://www.webpagetest.org/lighthouse.php?test=${result.id}`;
@@ -32,22 +32,30 @@ class Dashboard extends React.Component {
       timestamps,
       wptUrl,
     } = Utils.formatDashboard(this.props);
-
     if (!data.length || !wptUrl) return;
 
     const { _index: index } = data[0];
     const timestamp = timestamps[index];
-    const result = results[timestamp];
+    const result = this.getResult(results, timestamp)[0];
     const testUrl = `${wptUrl}/result/${result.id}/`;
 
     window.open(testUrl, '_blank');
   }
+
+  getResult = (results, timestamp) => (
+    results
+      .filter(({ date }) => (
+        (date === timestamp)
+      ))
+      .map(obj => obj)
+  )
 
   render() {
     const {
       profiles,
       profile,
       onProfileChange,
+      onPeriodChange,
     } = this.props;
 
     const {
@@ -59,20 +67,24 @@ class Dashboard extends React.Component {
     return (
       <div className="u-wrapper">
         <section className="u-wrapper__nav">
-          {profiles.map(({ slug, name }) => (
-            <span
-              key={slug}
-              role="button"
-              tabIndex={0}
-              className={slug === profile.slug ? 'active' : ''}
-              name={slug}
-              onClick={() => onProfileChange(slug)}
-              onKeyPress={() => onProfileChange(slug)}
-            >
-              {name}
-            </span>
-          ))}
-          <SelectDate />
+          <div>
+            {profiles.map(({ slug, name }) => (
+              <span
+                key={slug}
+                role="button"
+                tabIndex={0}
+                className={slug === profile.slug ? 'active' : ''}
+                name={slug}
+                onClick={() => onProfileChange(slug)}
+                onKeyPress={() => onProfileChange(slug)}
+              >
+                {name}
+              </span>
+            ))}
+          </div>
+          <SelectDate
+            onPeriodChange={onPeriodChange}
+          />
         </section>
         <section className="u-wrapper__sections">
           <Section
@@ -89,7 +101,6 @@ class Dashboard extends React.Component {
             title="Load times"
             yLabel="Time (seconds)"
           />
-
           <Section
             {...this.props}
             id="rendering"
@@ -104,7 +115,6 @@ class Dashboard extends React.Component {
             title="Rendering"
             yLabel="Time (seconds)"
           />
-
           <Section
             {...this.props}
             id="pagespeed"
@@ -117,12 +127,11 @@ class Dashboard extends React.Component {
             )}
             lastResult={lastResult}
             maxValue={100}
-            metrics={['pagespeed', 'lighthouse']}
+            metrics={['lighthouse']}
             onClick={this.onClickPagespeed}
             title="Google PageSpeed and Lighthouse"
             yLabel="Score (0-100)"
           />
-
           <Section
             {...this.props}
             id="contentBreakdownBytes"
@@ -145,7 +154,6 @@ class Dashboard extends React.Component {
             title="Content breakdown (size)"
             yLabel="Traffic (kilobytes)"
           />
-
           <Section
             {...this.props}
             id="contentBreakdownRequests"
@@ -168,7 +176,6 @@ class Dashboard extends React.Component {
             title="Content breakdown (requests)"
             yLabel="Requests"
           />
-
           {videoFrames.length && wptUrl
           && (
             <div className="c-Section">
@@ -207,6 +214,7 @@ Dashboard.propTypes = {
   profiles: PropTypes.array.isRequired,
   profile: PropTypes.object.isRequired,
   onProfileChange: PropTypes.func.isRequired,
+  onPeriodChange: PropTypes.func.isRequired,
 };
 
 export default Dashboard;
