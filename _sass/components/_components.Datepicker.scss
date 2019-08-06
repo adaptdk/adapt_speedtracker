@@ -1,38 +1,37 @@
-.c-Datepickers {
-  display: flex;
-  padding-bottom: 15px;
-  padding-right: 20px;
+.c-Datepicker {
+  &__wrapper {
+    display: flex;
+    padding-bottom: 15px;
+    padding-right: 20px;
 
-  @media(max-width: 960px) {
-    padding-right: unset;
-    justify-content: center;
-    width: 100%;
+    @media(max-width: 960px) {
+      padding-right: unset;
+      justify-content: center;
+      width: 100%;
+    }
+  }
+
+  position: relative;
+
+  &__svg {
+    position: absolute;
+    top: 8px;
+    left: 15px;
   }
 
   &__field {
-    position: relative;
-
-    &--svg {
-      position: absolute;
-      top: 8px;
-      left: 15px;
-    }
-
+    width: 170px;
+    padding-bottom: 10px;
+    cursor: pointer;
+    border: 1px solid $primary;
+    border-radius: 30px;
+    padding: 10px;
+    background: none;
+    color: var(--primary);
+    text-align: center;
+    font-weight: bold;
     &--from {
       margin-right: 10px;
-    }
-  
-    &--from, &--to {
-      width: 170px;
-      padding-bottom: 10px;
-      cursor: pointer;
-      border: 1px solid $primary;
-      border-radius: 30px;
-      padding: 10px;
-      background: none;
-      color: var(--primary);
-      text-align: center;
-      font-weight: bold;
     }
   }
 }
