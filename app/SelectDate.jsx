@@ -24,15 +24,15 @@ const SelectDate = ({ onPeriodChange }) => {
   };
 
   return (
-    <div className="c-Datepickers">
-      <div className="c-Datepickers__field">
+    <div className="c-Datepicker__wrapper">
+      <div className="c-Datepicker">
         <SVG
           width="20px"
           src={CalenderFrom}
-          className="c-Datepickers__field--svg"
+          className="c-Datepicker__svg"
         />
         <DatePicker
-          className="c-Datepickers__field--from"
+          className="c-Datepicker__field c-Datepicker__field--from"
           dateFormat="dd MM yyyy"
           selected={from}
           selectsStart
@@ -42,14 +42,14 @@ const SelectDate = ({ onPeriodChange }) => {
           maxDate={to}
         />
       </div>
-      <div className="c-Datepickers__field">
+      <div className="c-Datepicker">
         <SVG
           width="20px"
           src={CalenderTo}
-          className="c-Datepickers__field--svg"
+          className="c-Datepicker__svg"
         />
         <DatePicker
-          className="c-Datepickers__field--to"
+          className="c-Datepicker__field c-Datepicker__field--to"
           dateFormat="dd MM yyyy"
           selected={to}
           selectsEnd
