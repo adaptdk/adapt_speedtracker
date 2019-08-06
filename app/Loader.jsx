@@ -1,10 +1,11 @@
 import React from 'react';
-import Logo from './Logo';
+import SVG from 'react-inlinesvg';
+import Logo from '../uploads/Logo.svg';
 
 const Loader = () => (
   <div className="c-Loader">
     <div className="c-Loader__content">
-      <Logo animate width={80} />
+      <SVG width="80px" src={Logo} />
     </div>
   </div>
 );

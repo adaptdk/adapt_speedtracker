@@ -19,6 +19,10 @@ const config = {
           'css-loader',
         ],
       },
+      {
+        test: /\.svg$/,
+        loader: 'svg-inline-loader',
+      },
     ],
   },
   resolve: {

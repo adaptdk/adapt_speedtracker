@@ -10,6 +10,11 @@
     max-width: 1600px;
     margin: auto;
 
+    @media(max-width: 960px) {
+      flex-wrap: wrap-reverse;
+      justify-content: center;
+    }
+
     span {
       margin-left: 20px;
       color: gray;

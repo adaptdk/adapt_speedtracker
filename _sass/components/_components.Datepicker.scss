@@ -1,3 +1,82 @@
 .c-Datepicker {
-  margin-right: 20px;
+  display: flex;
+  padding-bottom: 15px;
+  padding-right: 20px;
+
+  @media(max-width: 960px) {
+    padding-right: unset;
+    justify-content: center;
+    width: 100%;
+  }
+
+  &--from {
+    margin-right: 10px;
+  }
+
+  &--from, &--to {
+    width: 170px;
+    padding-bottom: 10px;
+    cursor: pointer;
+    border: 1px solid $primary;
+    border-radius: 30px;
+    padding: 10px;
+    background: none;
+    color: var(--primary);
+    text-align: center;
+    font-weight: bold;
+  }
+
+  section {
+    position: relative;
+
+    svg {
+      position: absolute;
+      top: 8px;
+      left: 15px;
+    }
+  }
+}
+
+#root {
+  .react-datepicker__day--selected,
+  .react-datepicker__day--in-range,
+  .react-datepicker__day--in-selecting-range-start,
+  .react-datepicker__day--in-selecting-range:hover {
+    background-color: var(--primary);
+  }
+
+  .react-datepicker__day--selected:hover, .react-datepicker__day--in-selecting-range:hover, .react-datepicker__day--in-range:hover,
+  .react-datepicker__month-text--selected:hover,
+  .react-datepicker__month-text--in-selecting-range:hover,
+  .react-datepicker__month-text--in-range:hover {
+    background-color: var(--primary);
+    opacity: 1;
+  }
+
+  .react-datepicker__day--keyboard-selected,
+  .react-datepicker__month-text--keyboard-selected {
+    border-radius: 0.3rem;
+    background-color: var(--primary);
+    color: #fff;
+  }
+
+  .react-datepicker__day--keyboard-selected:hover,
+  .react-datepicker__month-text--keyboard-selected:hover {
+    background-color: var(--primary);
+  }
+
+  .react-datepicker__day--in-selecting-range,
+  .react-datepicker__month-text--in-selecting-range {
+    background-color: var(--primary);
+    opacity: 0.5;
+  }
+
+  .react-datepicker__month--selecting-range .react-datepicker__day--in-range,
+  .react-datepicker__month--selecting-range
+  .react-datepicker__month-text--in-range {
+    background-color: var(--primary);
+    opacity: 0.5;
+    color: #000;
+  }
+
 }

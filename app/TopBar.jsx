@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-
-import Logo from './Logo';
+import SVG from 'react-inlinesvg';
+import Logo from '../uploads/Logo.svg';
 
 const startScheduler = (profile) => {
   const { slug } = profile;
@@ -24,7 +24,7 @@ const startScheduler = (profile) => {
 const TopBar = ({ profile }) => (
   <div className="c-TopBar">
     <div className="c-TopBar__inner">
-      <Logo width={40} />
+      <SVG width="70px" src={Logo} />
       <button type="button" onClick={() => startScheduler(profile)}>Start test</button>
     </div>
   </div>
