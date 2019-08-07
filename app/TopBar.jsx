@@ -6,14 +6,20 @@ import Logo from '../uploads/Logo.svg';
 
 const startScheduler = (profile) => {
   const { slug } = profile;
-  const url = `https://speedyapi.herokuapp.com/v1/test/adaptdk/adapt_speedtracker/master/${slug}`;
+  const url = `http://localhost:1234/create/adaptdk/adapt_speedtracker/master`;
 
-  axios.get(url, {
-    params: {
-      key: 'kobajers',
-    },
-  })
-    .then((response) => {
+  axios.post(url, {
+      _default: false,
+      name: "tester",
+      interval: 5,
+      parameters: {
+        connectivity: "cable",
+        location: "ec2-eu-west-3:Chrome",
+        url: 'https://lol.com',
+        runs: '2',
+        video: true,
+      }
+  }).then((response) => {
       if (response.data.success === true) console.log(`next run at ${new Date(response.data.nextRun)}`);
     })
     .catch((error) => {
