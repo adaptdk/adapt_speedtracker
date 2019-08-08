@@ -10,7 +10,7 @@ const selectField = ({
   meta: { touched, error },
 }) => (
   <label className="field field--select" htmlFor={label}>
-    <span className="field__select">{label}</span>
+    <span className="field__label">{label}</span>
     <select
       {...input}
       className="field__input"
