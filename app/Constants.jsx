@@ -179,6 +179,8 @@ export const locationOptions = [
   'ec2-eu-west-3:Chrome',
 ];
 
+export const baseURL = process.env.NODE === 'development' ? '/adapt_speedtracker' : '';
+
 export const chartOptions = (props) => {
   const { onClick, metrics } = props;
 

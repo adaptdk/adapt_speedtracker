@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import SelectDate from './SelectDate';
 import Section from './Section';
 import * as Utils from './Utils';
+import { baseURL } from './Constants';
+
 
 class Dashboard extends React.Component {
   onClickPagespeed = (event, data) => {
@@ -81,7 +83,7 @@ class Dashboard extends React.Component {
                 {name}
               </span>
             ))}
-            <a className="new-profile" href="/create">Add new site</a>
+            <a className="new-profile" href={`${baseURL}/create`}>Add new site</a>
           </div>
           <SelectDate
             onPeriodChange={onPeriodChange}
