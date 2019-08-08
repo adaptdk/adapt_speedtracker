@@ -1,0 +1,34 @@
+.c-Create {
+  margin-top: 50px;
+  &__title {
+    text-align: center;
+    font-size: 15px;
+  }
+
+  button.button {
+    position: relative;
+    background: none;
+    background-color: $primary;
+    color: white;
+
+    &:before {
+      content: "";
+      transition: background-color 200ms ease;
+      background-color: rgba(0, 0, 0, 0);
+      left: 0;
+      right: 0;
+      bottom: 0;
+      top: 0;
+      z-index: 0;
+      position: absolute;
+      mix-blend-mode: overlay;
+    }
+
+    &:hover {
+      &:before {
+        content: "";
+        background-color: rgba(0, 0, 0, 0.2);
+      }
+    }
+  }
+}
