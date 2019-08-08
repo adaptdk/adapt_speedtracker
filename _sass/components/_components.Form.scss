@@ -1,103 +1,19 @@
 .c-Create-form {
-  max-width: 400px;
+  max-width: 500px;
   text-align: center;
   margin: auto;
   margin-top: 20px;
 
-  button {
-    &:after {
-      background: rgba(220, 220, 220, 0.5);
-    }
+  @media (max-width: 768px) {
+    max-width: 300px;
   }
 
-  .label__wrapper {
-    .input,
-    .select {
-      width: 100%;
-    }
+  .wrapper {
+    display: flex;
+    justify-content: center;;
 
-    .select {
-      background: white;
-      border: 1px solid rgba(220, 220, 220, 0.9);
-      height: 38px;
-
-      &:focus {
-        outline: 0;
-        border-color: #85b7d9;
-      }
-    }
-
-    .input {
-      background: white;
-      border-width: 1px;
-      height: 38px;
-      border: 1px solid rgba(220, 220, 220, 0.9);
-      padding: 10px;
-      border-radius: 3px;
-
-      &::placeholder {
-        opacity: 0.5;
-      }
-
-      &:focus {
-        outline: 0;
-        border-color: #85b7d9;
-      }
+    .field:nth-child(2n) {
+      padding-left: 30px;
     }
   }
-
-  .checkbox__wrapper {
-    padding-right: 25px;
-    .checkbox {
-      display: none;
-      &:checked ~ .label:after {
-        content: "";
-        border: 1px solid black;
-        border-width: 0px 2px 2px 0px;
-        position: absolute;
-        top: 2px;
-        width: 5px;
-        height: 10px;
-        -webkit-transform: rotate(45deg);
-        -ms-transform: rotate(45deg);
-        transform: rotate(45deg);
-        left: -13px;
-      }
-    }
-
-    .label {
-      position: relative;
-      cursor: pointer;
-      &:hover {
-        &:before {
-          border-color: grey;
-        }
-      }
-      &:before {
-        content: "";
-        border: 1px solid rgb(220, 220, 220);
-        width: 15px;
-        height: 15px;
-        position: absolute;
-        top: 1px;
-        border-radius: 3px;
-        left: -18px;
-      }
-    }
-  }
-}
-
-.button {
-  &:hover {
-    background-color: rgba(220, 220, 220, 1);
-  }
-  cursor: pointer;
-  height: 38px;
-  width: 100%;
-  background: white;
-  border-width: 1px;
-  border: unset;
-  // border: 1px solid rgba(220, 220, 220, 0.9);
-  border-radius: 3px;
-  background-color: rgba(220, 220, 220, 0.9);
 }

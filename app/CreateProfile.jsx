@@ -11,7 +11,7 @@ const CreatePage = () => (
     className="c-Create"
     style={Utils.hexToRgb(siteSettings.colors)}
   >
-    <div className="c-Create__title">Create Page</div>
+    <header className="c-Create__title">Create Page</header>
     <CreateForm />
   </div>
 );
