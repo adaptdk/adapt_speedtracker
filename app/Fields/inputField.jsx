@@ -9,19 +9,17 @@ const inputField = ({
   autoComplete,
   meta: { touched, error },
 }) => (
-  <div className="field-wrapper field-wrapper--input">
-    <label className="field" htmlFor={label}>
-      <span className="label">{label}</span>
-      <input
-        {...input}
-        className="input"
-        placeholder={placeholder}
-        autoComplete={autoComplete}
-        type={type}
-      />
-      {touched && error && <span>{error}</span>}
-    </label>
-  </div>
+  <label className="field field--input" htmlFor={label}>
+    <span className="field__label">{label}</span>
+    <input
+      {...input}
+      className="field__input"
+      placeholder={placeholder}
+      autoComplete={autoComplete}
+      type={type}
+    />
+    {touched && error && <span>{error}</span>}
+  </label>
 );
 
 inputField.propTypes = {
@@ -32,6 +30,5 @@ inputField.propTypes = {
   autoComplete: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
 };
-
 
 export default inputField;

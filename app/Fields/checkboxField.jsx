@@ -6,18 +6,16 @@ const checkboxField = ({
   label,
   meta: { touched, error },
 }) => (
-  <div className="field field--checkbox">
-    <label className="field__label" htmlFor={label}>
-      <input
-        id={label}
-        {...input}
-        className="field__input"
-        type="checkbox"
-      />
-      <span className="field__text">{label}</span>
-      {touched && error && <span>{error}</span>}
-    </label>
-  </div>
+  <label className="field field--checkbox" htmlFor={label}>
+    <input
+      id={label}
+      {...input}
+      className="field__input"
+      type="checkbox"
+    />
+    <span className="field__label">{label}</span>
+    {touched && error && <span>{error}</span>}
+  </label>
 );
 
 checkboxField.propTypes = {

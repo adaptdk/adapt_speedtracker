@@ -5,7 +5,6 @@ import Section from './Section';
 import * as Utils from './Utils';
 import { baseURL } from './Constants';
 
-
 class Dashboard extends React.Component {
   onClickPagespeed = (event, data) => {
     const {

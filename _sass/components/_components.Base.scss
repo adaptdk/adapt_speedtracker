@@ -1,3 +1,69 @@
+select {
+  background: white;
+  border: 1px solid $border-color;
+
+  &:focus {
+    outline: 0;
+    border-color: $border-color--focus;
+  }
+}
+
+button {
+  outline: 0;
+  cursor: pointer;
+  border: unset;
+  border-radius: 22px;
+  background-color: $button;
+
+
+  &:hover {
+    background-color: $button--hover;
+  }
+
+  &.button {
+    &--submit, &--back, &--reset {
+      height: 45px;
+    }
+
+    &--submit {
+      color: white;
+      width: 100%;
+      margin-top: 40px;
+      background-color: rgba(var(--primary), 0.9);
+  
+      &:hover {
+        background-color: $primary;
+      }
+    }
+
+    &--back {
+      width: 50%;
+    }
+  
+    &--reset {
+      width: 50%;
+      margin-top: 35px;
+    }
+  }
+}
+
+input {
+  background: white;
+  border-width: 1px;
+  border: 1px solid $border-color;
+  padding: 10px;
+  border-radius: 3px;
+
+  &::placeholder {
+    opacity: 0.5;
+  }
+
+  &:focus {
+    outline: 0;
+    border-color: $border-color--focus;
+  }
+}
+
 input[type='checkbox'] {
   display: none;
 }
@@ -28,7 +94,8 @@ input[type='checkbox']:checked + span:after {
 
 input[type='checkbox'] + span:before {
   content: "";
-  border: 1px solid rgb(220, 220, 220);
+  background: white;
+  border: 1px solid $border-color;
   width: 15px;
   height: 15px;
   position: absolute;

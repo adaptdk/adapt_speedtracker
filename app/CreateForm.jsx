@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Checkbox } from 'semantic-ui-react';
 import {
   reduxForm,
   getFormValues,
@@ -9,9 +8,9 @@ import {
   Field,
 } from 'redux-form';
 import inputField from './Fields/inputField';
-import dropdownField from './Fields/dropdownField';
+import selectField from './Fields/selectField';
 import checkboxField from './Fields/checkboxField';
-import { connectivityOptions, locationOptions } from './Constants';
+import { connectivityOptions, locationOptions, baseURL } from './Constants';
 
 const axios = require('axios');
 
@@ -49,7 +48,6 @@ class CreateForm extends React.Component {
     const { handleSubmit } = this.props;
     return (
       <Form onSubmit={handleSubmit(this.onSubmit)} className="c-Create-form">
-        <Checkbox />
         <Field
           type="text"
           name="name"
@@ -71,7 +69,7 @@ class CreateForm extends React.Component {
           name="connectivity"
           label="Connectivity"
           options={connectivityOptions}
-          component={dropdownField}
+          component={selectField}
           placeholder="Select a connectivity type..."
         />
         <Field
@@ -79,11 +77,11 @@ class CreateForm extends React.Component {
           name="location"
           label="Location"
           options={locationOptions}
-          component={dropdownField}
+          component={selectField}
           placeholder="Select a location..."
         />
         <Field
-          type="text"
+          type="url"
           name="url"
           label="URL"
           component={inputField}
@@ -98,7 +96,7 @@ class CreateForm extends React.Component {
           autoComplete="runs"
           placeholder="Enter run count"
         />
-        <div>
+        <div className="wrapper">
           <Field
             name="video"
             label="Video"
@@ -110,13 +108,18 @@ class CreateForm extends React.Component {
             component={checkboxField}
           />
         </div>
-        <div>
-          <button className="button button--red" type="submit">
-            Submit
-          </button>
-        </div>
-        <button type="button">
+        <button className="button button--submit" type="submit">
+          Submit
+        </button>
+        <button className="button button--reset" type="button">
           Reset
+        </button>
+        <button
+          type="button"
+          className="button button--back"
+          onClick={() => { window.location.href = `${baseURL}/`; }}
+        >
+          Back
         </button>
       </Form>
     );
