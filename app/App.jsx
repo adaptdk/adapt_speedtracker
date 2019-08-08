@@ -1,5 +1,7 @@
 import React from 'react';
 import { render } from 'react-dom';
+import { Provider } from 'react-redux';
+import store from './store/store';
 import Dashboard from './Dashboard';
 import Footer from './Footer';
 import Loader from './Loader';
@@ -10,7 +12,6 @@ import 'react-datepicker/dist/react-datepicker.css';
 import siteSettings from '../site-settings.json';
 
 const objectPath = require('object-path');
-
 require('es6-promise').polyfill();
 
 class App extends React.Component {
@@ -43,7 +44,7 @@ class App extends React.Component {
   componentDidUpdate(oldProps, oldState) {
     const { period: { from, to }, profile } = this.state;
     if ((oldState.period.from !== from)
-    || (oldState.period.to !== to) || (oldState.profile !== profile)) {
+      || (oldState.period.to !== to) || (oldState.profile !== profile)) {
       this.fetchData(from, to);
     }
   }
@@ -121,11 +122,10 @@ class App extends React.Component {
       state,
     } = this;
     const { loading } = state;
-
     return (
-      <div style={siteSettings.colors}>
-        { loading
-        && <Loader loading={loading} />}
+      <div style={Utils.hexToRgb(siteSettings.colors)}>
+        {loading
+          && <Loader loading={loading} />}
         <TopBar
           {...state}
         />
@@ -140,4 +140,9 @@ class App extends React.Component {
   }
 }
 
-render(<App />, document.getElementById('root'));
+render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById('root'),
+);

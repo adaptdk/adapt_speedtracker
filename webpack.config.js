@@ -1,9 +1,12 @@
 const config = {
-  entry: './app/App.jsx',
+  entry: {
+    app: './app/App.jsx',
+    createprofile: './app/CreateProfile.jsx',
+  },
   output: {
     path: __dirname,
     publicPath: '/',
-    filename: 'bundle.js',
+    filename: '[name].js',
   },
   module: {
     rules: [

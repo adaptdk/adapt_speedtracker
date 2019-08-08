@@ -1,8 +1,8 @@
-$primary : var(--primary);
-$accent : var(--accent);
-$link : var(--link);
-$background : var(--bg-primary);
-$background-secondary : var(--bg-secondary);
+$primary : rgb(var(--primary));
+$accent : rgb(var(--accent));
+$link : rgb(var(--link));
+$background : rgb(var(--bg-primary));
+$background-secondary : rgb(var(--bg-secondary));
 
 
 body {

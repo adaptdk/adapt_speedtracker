@@ -58,6 +58,18 @@ const getTimestampsByInterval = (timestamps, dateFrom, dateTo) => (
     .map(({ date }) => date)
 );
 
+const hexToRgb = (hexes) => {
+  let transformedHexes = {};
+  Object.values(hexes).forEach((hex, index) => {
+    const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    transformedHexes = {
+      ...transformedHexes,
+      [Object.keys(hexes)[index]]: `${parseInt(result[1], 16)}, ${parseInt(result[2], 16)}, ${parseInt(result[3], 16)}`,
+    };
+  });
+  return transformedHexes;
+};
+
 const formatDashboard = (props) => {
   const {
     results,
@@ -95,6 +107,7 @@ const formatDashboard = (props) => {
 };
 
 export {
+  hexToRgb,
   getColor,
   getVideoFrameURL,
   getTimestampsByInterval,

@@ -160,6 +160,25 @@ export const initialDate = () => {
   return { to, from };
 };
 
+export const connectivityOptions = [
+  'Cable',
+  'DSL',
+  '3GSlow',
+  '3G',
+  '3GFast',
+  '4G',
+  'LTE',
+  'Edge',
+  '2G',
+  'Dial',
+  'FIOS',
+  'Native',
+];
+
+export const locationOptions = [
+  'ec2-eu-west-3:Chrome',
+];
+
 export const chartOptions = (props) => {
   const { onClick, metrics } = props;
 
