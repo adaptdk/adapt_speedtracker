@@ -12,16 +12,14 @@ const inputField = ({
   <div className="field-wrapper field-wrapper--input">
     <label className="field" htmlFor={label}>
       <span className="label">{label}</span>
-      <div className="field__wrapper">
-        <input
-          {...input}
-          className="input"
-          placeholder={placeholder}
-          autoComplete={autoComplete}
-          type={type}
-        />
-        {touched && error && <span>{error}</span>}
-      </div>
+      <input
+        {...input}
+        className="input"
+        placeholder={placeholder}
+        autoComplete={autoComplete}
+        type={type}
+      />
+      {touched && error && <span>{error}</span>}
     </label>
   </div>
 );

@@ -8,16 +8,14 @@ const checkboxField = ({
 }) => (
   <div className="field field--checkbox">
     <label className="field__label" htmlFor={label}>
-      <div className="field__inner">
-        <input
-          id={label}
-          {...input}
-          className="field__input"
-          type="checkbox"
-        />
-        {touched && error && <span>{error}</span>}
-      </div>
+      <input
+        id={label}
+        {...input}
+        className="field__input"
+        type="checkbox"
+      />
       <span className="field__text">{label}</span>
+      {touched && error && <span>{error}</span>}
     </label>
   </div>
 );
