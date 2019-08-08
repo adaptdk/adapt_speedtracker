@@ -81,7 +81,7 @@ class Dashboard extends React.Component {
                 {name}
               </span>
             ))}
-            <a className="new-profile" href="/create-profile">Add new site</a>
+            <a className="new-profile" href="/create">Add new site</a>
           </div>
           <SelectDate
             onPeriodChange={onPeriodChange}
