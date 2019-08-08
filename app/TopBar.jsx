@@ -5,21 +5,9 @@ import SVG from 'react-inlinesvg';
 import Logo from '../uploads/Logo.svg';
 
 const startScheduler = (profile) => {
-  const { slug } = profile;
-  const url = `http://localhost:1234/create/adaptdk/adapt_speedtracker/master`;
+  const url = 'https://speedyapi.herokuapp.com/v1/test/adaptdk/adapt_speedtracker/master';
 
-  axios.post(url, {
-    _default: false,
-    name: "tester",
-    interval: 5,
-    parameters: {
-      connectivity: "cable",
-      location: "ec2-eu-west-3:Chrome",
-      url: 'https://lol.com',
-      runs: '2',
-      video: true,
-    }
-  }).then((response) => {
+  axios.get(`${url}/${profile.slug}?key=kobajers`).then((response) => {
     if (response.data.success === true) console.log(`next run at ${new Date(response.data.nextRun)}`);
   })
     .catch((error) => {
@@ -27,7 +15,7 @@ const startScheduler = (profile) => {
     });
 };
 
-const TopBar = ({ profile, formValues }) => (
+const TopBar = ({ profile }) => (
   <div className="c-TopBar">
     <div className="c-TopBar__inner">
       <SVG width="70px" src={Logo} />
