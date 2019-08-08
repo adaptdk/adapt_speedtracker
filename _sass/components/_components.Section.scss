@@ -1,12 +1,13 @@
 .u-wrapper {
   background-color: $background;
-  padding-top: 40px;
+  padding-top: 10px;
 
   &__nav {
-    padding-bottom: 20px;
+    padding-bottom: 0px;
     font-size: 15px;
     display: flex;
     justify-content: space-between;
+    align-items: center;
     max-width: 1600px;
     margin: auto;
 
@@ -14,17 +15,26 @@
       flex-wrap: wrap-reverse;
       justify-content: center;
     }
+    .nav__profiles {
+      position: relative;
+      height: 30px;
+      display: flex;
+      align-items: center;
+    }
 
-    span {
+    span, 
+    a {
+      position: relative;
       margin-left: 20px;
       color: gray;
       cursor: pointer;
       position: relative;
+      font-weight: 400;
 
       &::after {
         content: '';
         position: absolute;
-        bottom: -10px;
+        bottom: -5px;
         left: 0;
         background-color: $primary;
         opacity: 0;
@@ -32,8 +42,9 @@
         width: 100%;
       }
 
-      &:hover {
+      &:hover, &:focus {
         color: black;
+        outline: none;
       }
 
       &.active {
@@ -42,6 +53,17 @@
         &::after {
           opacity: 1;
         }
+      }
+    }
+
+    .new-profile {
+      color: #aaa;
+
+      &::before {
+        content: "+";
+        font-size: 20px;
+        margin-right: 5px;
+        font-weight: 200;
       }
     }
   }

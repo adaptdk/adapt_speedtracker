@@ -67,7 +67,7 @@ class Dashboard extends React.Component {
     return (
       <div className="u-wrapper">
         <section className="u-wrapper__nav">
-          <div>
+          <div className="nav__profiles">
             {profiles.map(({ slug, name }) => (
               <span
                 key={slug}
@@ -81,6 +81,7 @@ class Dashboard extends React.Component {
                 {name}
               </span>
             ))}
+            <a className="new-profile" href="/create-profile">Add new site</a>
           </div>
           <SelectDate
             onPeriodChange={onPeriodChange}

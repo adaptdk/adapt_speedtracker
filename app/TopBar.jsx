@@ -38,7 +38,11 @@ const TopBar = ({ profile, formValues }) => (
   <div className="c-TopBar">
     <div className="c-TopBar__inner">
       <SVG width="70px" src={Logo} />
-      <button type="button" onClick={() => startScheduler(profile)}>Start test</button>
+      <div className="logo-text">
+        <span>SPEED</span>
+        <span>MONITOR</span>
+      </div>
+      <button className="start-test" type="button" onClick={() => startScheduler(profile)}>Start test</button>
     </div>
 
     <Form onSubmit={(e) => {
