@@ -1,6 +1,6 @@
 const config = {
   entry: {
-    app: './app/App.jsx',
+    fish: './app/App.jsx',
     createprofile: './app/CreateProfile.jsx',
   },
   output: {
