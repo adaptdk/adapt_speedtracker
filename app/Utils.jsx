@@ -2,20 +2,6 @@ const getColor = (color, opacity) => (
   `rgba(${color[0]}, ${color[1]}, ${color[2]}, ${opacity || 1})`
 );
 
-const formatProfileDropdown = (values) => {
-  const options = [];
-
-  values.forEach(({ slug, name }) => {
-    options.push({
-      key: slug,
-      text: name,
-      value: slug,
-    });
-  });
-
-  return options;
-};
-
 const leftPad = (input, length, pad) => {
   const inputStr = input.toString();
   const lengthDiff = length - inputStr.length;
@@ -47,6 +33,25 @@ const traverseObject = (obj, callback, path) => {
   } else {
     callback(obj, (path || []));
   }
+};
+
+const formatProfileValues = (values) => {
+  const {
+    isfrontpage, name, interval, connectivity, location, url, runs, video,
+  } = values;
+
+  return {
+    isfrontpage,
+    name,
+    interval,
+    parameters: {
+      connectivity,
+      location,
+      url,
+      runs,
+      video,
+    },
+  };
 };
 
 const getTimestampsByInterval = (timestamps, dateFrom, dateTo) => (
@@ -107,11 +112,11 @@ const formatDashboard = (props) => {
 };
 
 export {
+  formatProfileValues,
   hexToRgb,
   getColor,
   getVideoFrameURL,
   getTimestampsByInterval,
   traverseObject,
-  formatProfileDropdown,
   formatDashboard,
 };

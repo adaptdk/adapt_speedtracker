@@ -23,7 +23,7 @@ const selectField = ({
         </option>
       ))}
     </select>
-    {touched && error && <span>{error}</span>}
+    {touched && error && <span className="field__error">{error}</span>}
   </label>
 );
 

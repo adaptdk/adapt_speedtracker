@@ -31,6 +31,12 @@ button {
       margin-top: 40px;
       background-color: rgba(var(--primary), 0.9);
   
+      &:disabled {
+        opacity: 0.3;
+        pointer-events: none;
+        cursor: unset;
+      }
+
       &:hover {
         background-color: $primary;
       }

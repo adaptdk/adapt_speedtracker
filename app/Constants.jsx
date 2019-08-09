@@ -180,6 +180,7 @@ export const locationOptions = [
 ];
 
 export const baseURL = process.env.NODE_ENV === 'production' ? '/adapt_speedtracker' : '';
+export const apiUrl = 'https://speedyapi.herokuapp.com/create/adaptdk/adapt_speedtracker/master?key=kobajers';
 
 export const chartOptions = (props) => {
   const { onClick, metrics } = props;
