@@ -18,7 +18,7 @@ const inputField = ({
       autoComplete={autoComplete}
       type={type}
     />
-    {touched && error && <span>{error}</span>}
+    {touched && error && <span className="field__error">{error}</span>}
   </label>
 );
 

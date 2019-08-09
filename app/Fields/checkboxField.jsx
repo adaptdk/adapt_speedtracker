@@ -14,7 +14,7 @@ const checkboxField = ({
       type="checkbox"
     />
     <span className="field__label">{label}</span>
-    {touched && error && <span>{error}</span>}
+    {touched && error && <span className="field__error">{error}</span>}
   </label>
 );
 

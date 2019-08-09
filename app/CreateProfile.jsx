@@ -1,20 +1,46 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
+import Loader from './Loader';
 import CreateForm from './CreateForm';
 import * as Utils from './Utils';
 import siteSettings from '../site-settings.json';
 import store from './store/store';
 
-const CreatePage = () => (
-  <div
-    className="c-Create"
-    style={Utils.hexToRgb(siteSettings.colors)}
-  >
-    <header className="c-Create__title">Create Page</header>
-    <CreateForm />
-  </div>
-);
+class CreatePage extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      loading: false,
+    };
+  }
+
+  setLoading = (loading) => {
+    this.setState({
+      loading,
+    });
+  }
+
+  render() {
+    const { loading } = this.state;
+
+    return (
+      <div style={Utils.hexToRgb(siteSettings.colors)}>
+        {loading
+          && <Loader loading={loading} />}
+        <div
+          className="c-Create"
+        >
+          <header className="c-Create__title">Create Page</header>
+          <CreateForm
+            setLoading={this.setLoading}
+          />
+        </div>
+      </div>
+    );
+  }
+}
 
 render(
   <Provider store={store}>
