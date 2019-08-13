@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import {
   reduxForm,
   getFormValues,
-  getFormSyncErrors,
   Form,
   Field,
 } from 'redux-form';
@@ -17,41 +16,58 @@ import {
   specialCharacters,
 } from './Validation';
 import inputField from './Fields/inputField';
-import sendProfile from './Api';
+import { sendProfile, startTest } from './Api';
 import selectField from './Fields/selectField';
 import checkboxField from './Fields/checkboxField';
-import { connectivityOptions, locationOptions, baseURL } from './Constants';
+import {
+  connectivityOptions,
+  locationOptions,
+  baseURL,
+  profileLink,
+} from './Constants';
 
 class CreateForm extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      response: '',
-    };
+    this.state = {};
   }
 
   onSubmit = () => {
     const { formValues, setLoading } = this.props;
     setLoading(true);
     return sendProfile(formValues)
-      .then(({ response }) => {
-        setLoading(false);
-
-        if (response.success) this.onSuccess();
-        else this.onError(response.error.code);
+      .then((res) => {
+        if (res.success) this.onSuccess();
+        else this.onError(res.error.code);
       });
   }
 
   onError = (err) => {
+    const { setLoading } = this.props;
+    setLoading(false);
+
     this.setState({
+      status: 'error',
       response: err,
     });
   }
 
   onSuccess = () => {
-    this.setState({
-      response: 'The profile has been created',
+    const {
+      formValues: { name },
+      setLoading,
+      reset,
+    } = this.props;
+
+    startTest(name).then(() => {
+      setLoading(false);
+      reset();
+
+      this.setState({
+        status: 'success',
+        response: `${profileLink}${name}`,
+      });
     });
   }
 
@@ -59,13 +75,16 @@ class CreateForm extends React.Component {
     const {
       handleSubmit,
       submitting,
-      formErrors,
       reset,
+      pristine,
     } = this.props;
-    const { response } = this.state;
+    const { status, response } = this.state;
 
     return (
-      <Form onSubmit={handleSubmit(this.onSubmit)} className="c-Create-form">
+      <Form
+        className="c-Create-form"
+        onSubmit={handleSubmit(this.onSubmit)}
+      >
         <Field
           type="text"
           name="name"
@@ -147,27 +166,29 @@ class CreateForm extends React.Component {
         </div>
         <button
           className="button button--submit"
-          disabled={submitting || Object.keys(formErrors).length !== 0}
+          disabled={submitting}
           type="submit"
         >
           Submit
         </button>
-        <div>
-          {response}
-        </div>
-        <button
-          onClick={() => reset()}
-          className="button button--reset"
-          type="button"
-        >
-          Reset
-        </button>
+        {status === 'error'
+          ? <div>{response}</div>
+          : <a href={response}>{response}</a>
+        }
         <button
           type="button"
           className="button button--back"
           onClick={() => { window.location.href = `${baseURL}/`; }}
         >
           Back
+        </button>
+        <button
+          onClick={() => reset()}
+          className="button button--reset"
+          type="button"
+          disabled={pristine || submitting}
+        >
+          Reset
         </button>
       </Form>
     );
@@ -176,7 +197,6 @@ class CreateForm extends React.Component {
 
 const mapStateToProps = state => ({
   formValues: getFormValues('create')(state),
-  formErrors: getFormSyncErrors('create')(state),
   initialValues: {
     location: locationOptions[0],
     video: false,
@@ -189,8 +209,8 @@ const formConfig = {
 };
 
 CreateForm.propTypes = {
+  pristine: PropTypes.bool.isRequired,
   formValues: PropTypes.object,
-  formErrors: PropTypes.object,
   submitting: PropTypes.bool.isRequired,
   reset: PropTypes.func.isRequired,
   setLoading: PropTypes.func.isRequired,
@@ -199,7 +219,6 @@ CreateForm.propTypes = {
 
 CreateForm.defaultProps = {
   formValues: {},
-  formErrors: {},
 };
 
 export default connect(mapStateToProps)(reduxForm(formConfig)(CreateForm));

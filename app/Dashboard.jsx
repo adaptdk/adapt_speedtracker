@@ -131,7 +131,7 @@ class Dashboard extends React.Component {
             maxValue={100}
             metrics={['lighthouse']}
             onClick={this.onClickPagespeed}
-            title="Google PageSpeed and Lighthouse"
+            title="Lighthouse"
             yLabel="Score (0-100)"
           />
           <Section

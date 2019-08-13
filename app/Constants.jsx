@@ -1,3 +1,5 @@
+import siteSettings from '../site-settings.json';
+
 export default {
   metrics: {
     breakdown: {
@@ -180,10 +182,13 @@ export const locationOptions = [
 ];
 
 export const baseURL = process.env.NODE_ENV === 'production' ? '/adapt_speedtracker' : '';
-export const apiUrl = 'https://speedyapi.herokuapp.com/create/adaptdk/adapt_speedtracker/master?key=kobajers';
+export const createUrl = `https://speedyapi.herokuapp.com/create/adaptdk/${siteSettings.repository}/master?key=kobajers`;
+export const deleteUrl = `https://speedyapi.herokuapp.com/delete/adaptdk/${siteSettings.repository}/master?key=kobajers`;
+export const scheduleUrl = `https://speedyapi.herokuapp.com/v1/test/adaptdk/${siteSettings.repository}/master`;
+export const profileLink = `https://adaptdk.github.io/${siteSettings.repository}/`;
 
 export const chartOptions = (props) => {
-  const { onClick, metrics } = props;
+  const { onClick, metrics, yLabel } = props;
 
   const options = {
     onClick,
@@ -205,10 +210,21 @@ export const chartOptions = (props) => {
         gridLines: {
           display: false,
         },
+        scaleLabel: {
+          display: true,
+          labelString: 'date',
+        },
       }],
       yAxes: [{
         gridLines: {
           display: false,
+        },
+        ticks: {
+          min: 0,
+        },
+        scaleLabel: {
+          display: true,
+          labelString: yLabel,
         },
       }],
     },
