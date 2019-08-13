@@ -30,10 +30,7 @@ class CreateForm extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      status: undefined,
-      response: undefined,
-    };
+    this.state = {};
   }
 
   onSubmit = () => {
