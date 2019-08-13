@@ -160,7 +160,7 @@ button[data-balloon] {
 [data-balloon-length="xlarge"]:after {
   width: 90vw;
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: $medium) {
   [data-balloon-length="xlarge"]:after {
     width: 380px;
   }

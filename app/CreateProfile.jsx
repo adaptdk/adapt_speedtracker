@@ -29,6 +29,7 @@ class CreatePage extends React.Component {
       <div style={Utils.hexToRgb(siteSettings.colors)}>
         {loading
           && <Loader loading={loading} />}
+        <div />
         <div
           className="c-Create"
         >

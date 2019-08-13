@@ -1,5 +1,4 @@
 .u-wrapper {
-  background-color: $background;
   padding-top: 10px;
 
   &__nav {
@@ -11,7 +10,7 @@
     max-width: 1600px;
     margin: auto;
 
-    @media(max-width: 960px) {
+    @media(max-width: $large) {
       flex-wrap: wrap-reverse;
       justify-content: center;
     }
@@ -80,7 +79,7 @@
 .c-Section {
   display: flex;
   flex: 1 1 25%;
-  min-width: 330px;
+  min-width: 300px;
   margin: 10px;
   flex-direction: column;
   justify-content: flex-start;
