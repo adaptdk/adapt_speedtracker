@@ -14,17 +14,17 @@ import {
   url,
   runs,
   specialCharacters,
-} from './Validation';
-import inputField from './Fields/inputField';
-import { sendProfile, startTest } from './Api';
-import selectField from './Fields/selectField';
-import checkboxField from './Fields/checkboxField';
+} from '../Validation';
+import inputField from '../Fields/inputField';
+import { sendProfile, startTest } from '../Api';
+import selectField from '../Fields/selectField';
+import checkboxField from '../Fields/checkboxField';
 import {
   connectivityOptions,
   locationOptions,
   baseURL,
   profileLink,
-} from './Constants';
+} from '../Constants';
 
 class CreateForm extends React.Component {
   constructor(props) {
