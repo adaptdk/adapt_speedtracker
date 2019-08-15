@@ -35,7 +35,7 @@
         }
 
         position: relative;
-        color: gray;
+        color: $gray;
         cursor: pointer;
         position: relative;
         font-weight: 400;
@@ -59,12 +59,12 @@
         }
   
         &:hover, &:focus {
-          color: black;
+          color: $black;
           outline: none;
         }
   
         &.active {
-          color: black;
+          color: $black;
           
           &::after {
             opacity: 1;
