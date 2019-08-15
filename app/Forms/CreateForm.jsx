@@ -14,17 +14,17 @@ import {
   url,
   runs,
   specialCharacters,
-} from './Validation';
-import inputField from './Fields/inputField';
-import { sendProfile, startTest } from './Api';
-import selectField from './Fields/selectField';
-import checkboxField from './Fields/checkboxField';
+} from '../Validation';
+import inputField from '../Fields/inputField';
+import { sendProfile, startTest } from '../Api';
+import selectField from '../Fields/selectField';
+import checkboxField from '../Fields/checkboxField';
 import {
   connectivityOptions,
   locationOptions,
   baseURL,
   profileLink,
-} from './Constants';
+} from '../Constants';
 
 class CreateForm extends React.Component {
   constructor(props) {
@@ -75,14 +75,12 @@ class CreateForm extends React.Component {
     const {
       handleSubmit,
       submitting,
-      reset,
-      pristine,
     } = this.props;
     const { status, response } = this.state;
 
     return (
       <Form
-        className="c-Create-form"
+        className="form form--create"
         onSubmit={handleSubmit(this.onSubmit)}
       >
         <Field
@@ -164,32 +162,26 @@ class CreateForm extends React.Component {
             component={checkboxField}
           />
         </div>
-        <button
-          className="button button--submit"
-          disabled={submitting}
-          type="submit"
-        >
-          Submit
-        </button>
+        <div className="wrapper">
+          <button
+            type="button"
+            className="button button--cancel"
+            onClick={() => { window.location.href = `${baseURL}/`; }}
+          >
+            Cancel
+          </button>
+          <button
+            className="button button--create"
+            disabled={submitting}
+            type="submit"
+          >
+            Create Profile
+          </button>
+        </div>
         {status === 'error'
           ? <div>{response}</div>
           : <a href={response}>{response}</a>
         }
-        <button
-          type="button"
-          className="button button--back"
-          onClick={() => { window.location.href = `${baseURL}/`; }}
-        >
-          Back
-        </button>
-        <button
-          onClick={() => reset()}
-          className="button button--reset"
-          type="button"
-          disabled={pristine || submitting}
-        >
-          Reset
-        </button>
       </Form>
     );
   }

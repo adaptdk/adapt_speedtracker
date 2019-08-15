@@ -126,12 +126,8 @@ class App extends React.Component {
       <div style={Utils.hexToRgb(siteSettings.colors)}>
         {loading
           && <Loader loading={loading} />}
-        <div
-          className="c-App"
-        >
-          <TopBar
-            {...state}
-          />
+        <div className="c-App">
+          <TopBar {...state} />
           <Dashboard
             {...state}
             onPeriodChange={this.changePeriod}

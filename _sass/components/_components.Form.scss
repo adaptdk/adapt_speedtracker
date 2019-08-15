@@ -1,4 +1,4 @@
-.c-Create-form {
+.form {
   max-width: 500px;
   text-align: center;
   margin: auto;
@@ -8,12 +8,16 @@
     max-width: 300px;
   }
 
-  .wrapper {
-    display: flex;
-    justify-content: center;;
-
-    .field:nth-child(2n) {
-      padding-left: 30px;
+  &--create { 
+    .wrapper {
+      margin-top: 15px;
+      padding-bottom: 20px;
+      display: flex;
+      justify-content: center;
+  
+      > :nth-child(2n) {
+        margin-left: 30px;
+      }
     }
   }
 }

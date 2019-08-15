@@ -55,6 +55,7 @@ class Dashboard extends React.Component {
     const {
       profiles,
       profile,
+      profile: { parameters: { url, connectivity, location } },
       onProfileChange,
       onPeriodChange,
     } = this.props;
@@ -70,7 +71,7 @@ class Dashboard extends React.Component {
         <section className="u-wrapper__nav">
           <div className="nav__profiles">
             {profiles.map(({ slug, name }) => (
-              <span
+              <div
                 key={slug}
                 role="button"
                 tabIndex={0}
@@ -80,13 +81,27 @@ class Dashboard extends React.Component {
                 onKeyPress={() => onProfileChange(slug)}
               >
                 {name}
-              </span>
+              </div>
             ))}
-            <a className="new-profile" href={`${baseURL}/create`}>Add new site</a>
           </div>
+          <a className="new-profile" href={`${baseURL}/create`}>Add new site</a>
           <SelectDate
             onPeriodChange={onPeriodChange}
           />
+        </section>
+        <section className="u-wrapper__profile">
+          <span>
+            Url:&nbsp;
+            {url}
+          </span>
+          <span>
+            Location:&nbsp;
+            {location}
+          </span>
+          <span>
+            Connectivity:&nbsp;
+            {connectivity}
+          </span>
         </section>
         <section className="u-wrapper__sections">
           <Section

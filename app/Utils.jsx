@@ -1,3 +1,5 @@
+import queryString from 'query-string';
+
 const getColor = (color, opacity) => (
   `rgba(${color[0]}, ${color[1]}, ${color[2]}, ${opacity || 1})`
 );
@@ -52,6 +54,14 @@ const formatProfileValues = (values) => {
       video,
     },
   };
+};
+
+const getProfile = (query) => {
+  const { name } = queryString.parse(query);
+  const profiles = window.PROFILES;
+
+  if (!name) return undefined;
+  return profiles.find(profile => profile.name === name);
 };
 
 const getTimestampsByInterval = (timestamps, dateFrom, dateTo) => (
@@ -112,6 +122,7 @@ const formatDashboard = (props) => {
 };
 
 export {
+  getProfile,
   formatProfileValues,
   hexToRgb,
   getColor,
