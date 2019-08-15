@@ -13,7 +13,7 @@ button {
   cursor: pointer;
   border: unset;
   border-radius: 22px;
-  background-color: $button;
+  background-color: white;
 
 
   &:hover {
@@ -21,14 +21,13 @@ button {
   }
 
   &.button {
-    &--submit, &--back, &--reset {
+    &--create, &--cancel {
       height: 45px;
     }
 
-    &--submit {
+    &--create {
       color: white;
       width: 100%;
-      margin-top: 40px;
       background-color: rgba(var(--primary), 0.9);
 
       &:hover {
@@ -36,18 +35,9 @@ button {
       }
     }
 
-    &--back {
-      width: 50%;
-    }
-  
-    &--reset {
-      width: 50%;
-      margin-top: 35px;
-
-      &:disabled {
-        pointer-events: none;
-        cursor: unset;
-      }
+    &--cancel {
+      border: 2px solid black;
+      width: 100%;
     }
   }
 }

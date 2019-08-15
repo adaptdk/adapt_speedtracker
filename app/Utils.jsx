@@ -59,7 +59,7 @@ const formatProfileValues = (values) => {
 const getProfile = (query) => {
   const { name } = queryString.parse(query);
   const profiles = window.PROFILES;
-  console.log(name, '|NAME TYPE', typeof name, profiles);
+
   if (!name) return undefined;
   return profiles.find(profile => profile.name === name);
 };

@@ -15,7 +15,7 @@ class Settings extends React.Component {
 
   render() {
     const { profile } = this.state;
-    console.log('RESULT ', profile)
+
     return (
       <div style={Utils.hexToRgb(siteSettings.colors)}>
         <div className="c-Settings">
