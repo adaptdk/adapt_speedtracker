@@ -55,6 +55,7 @@ class Dashboard extends React.Component {
     const {
       profiles,
       profile,
+      profile: { parameters: { url, connectivity, location } },
       onProfileChange,
       onPeriodChange,
     } = this.props;
@@ -87,6 +88,20 @@ class Dashboard extends React.Component {
           <SelectDate
             onPeriodChange={onPeriodChange}
           />
+        </section>
+        <section className="u-wrapper__profile">
+          <span>
+            Url:&nbsp;
+            {url}
+          </span>
+          <span>
+            Location:&nbsp;
+            {location}
+          </span>
+          <span>
+            Connectivity:&nbsp;
+            {connectivity}
+          </span>
         </section>
         <section className="u-wrapper__sections">
           <Section

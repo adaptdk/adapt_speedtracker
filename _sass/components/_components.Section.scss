@@ -1,6 +1,12 @@
 .u-wrapper {
   padding-top: 10px;
 
+  &__profile {
+    > span {
+      margin-left: 20px;
+    }
+  }
+
   &__nav {
     padding-bottom: 0px;
     font-size: 15px;
