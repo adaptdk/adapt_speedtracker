@@ -2,6 +2,9 @@
   padding-top: 10px;
 
   &__profile {
+    max-width: 1600px;
+    margin: auto;
+
     > span {
       margin-left: 20px;
     }
