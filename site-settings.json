@@ -1,5 +1,6 @@
 {
   "title" : "Speedtracker",
+  "repository" : "adapt_speedtracker",
   "colors": {
     "--primary": "#866EF7",
     "--accent": "#0000FF",

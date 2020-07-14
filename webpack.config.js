@@ -2,6 +2,7 @@ const config = {
   entry: {
     fish: './app/App.jsx',
     createprofile: './app/CreateProfile.jsx',
+    profilesettings: './app/Settings.jsx',
   },
   output: {
     path: __dirname,

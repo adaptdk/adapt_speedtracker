@@ -1,8 +1,8 @@
 import * as Utils from './Utils';
-import { apiUrl } from './Constants';
+import { createUrl, deleteUrl, scheduleUrl } from './Constants';
 
-const sendProfile = values => (
-  fetch(apiUrl, {
+export const sendProfile = values => (
+  fetch(createUrl, {
     method: 'POST',
     body: JSON.stringify(Utils.formatProfileValues(values)),
     headers: { 'Content-Type': 'application/json' },
@@ -12,4 +12,24 @@ const sendProfile = values => (
     .catch(err => err)
 );
 
-export default sendProfile;
+export const deleteProfile = name => (
+  fetch(`${deleteUrl}/${name}?key=kobajers`)
+    .then(res => res.json())
+    .then((res) => {
+      if (res.success === true) {
+        console.log('The profile has been deleted');
+      }
+    })
+    .catch(err => console.log(err))
+);
+
+export const startTest = name => (
+  fetch(`${scheduleUrl}/${name}?key=kobajers`)
+    .then(res => res.json())
+    .then((res) => {
+      if (res.success === true) {
+        console.log(`next run at ${new Date(res.nextRun)}`);
+      }
+    })
+    .catch(err => console.log(err))
+);

@@ -1,6 +1,14 @@
 .u-wrapper {
-  background-color: $background;
   padding-top: 10px;
+
+  &__profile {
+    max-width: 1600px;
+    margin: auto;
+
+    > span {
+      margin-left: 20px;
+    }
+  }
 
   &__nav {
     padding-bottom: 0px;
@@ -11,53 +19,66 @@
     max-width: 1600px;
     margin: auto;
 
-    @media(max-width: 960px) {
+    @media(max-width: $large) {
       flex-wrap: wrap-reverse;
       justify-content: center;
     }
+
     .nav__profiles {
       position: relative;
       height: 30px;
       display: flex;
       align-items: center;
-    }
+      overflow-x: auto;
+      overflow-y: hidden;
 
-    span, 
-    a {
-      position: relative;
-      margin-left: 20px;
-      color: gray;
-      cursor: pointer;
-      position: relative;
-      font-weight: 400;
+      > div, > a {
+        &:not(:first-child) {
+          margin-left: 20px;
+        }
 
-      &::after {
-        content: '';
-        position: absolute;
-        bottom: -5px;
-        left: 0;
-        background-color: $primary;
-        opacity: 0;
-        height: 2px;
-        width: 100%;
-      }
+        position: relative;
+        color: $gray;
+        cursor: pointer;
+        position: relative;
+        font-weight: 400;
 
-      &:hover, &:focus {
-        color: black;
-        outline: none;
-      }
-
-      &.active {
-        color: black;
-        
+        display: inline-block;
+        white-space: nowrap;
+        max-width: 250px;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        flex-shrink: 0;
+  
         &::after {
-          opacity: 1;
+          content: '';
+          position: absolute;
+          bottom: -5px;
+          left: 0;
+          background-color: $primary;
+          opacity: 0;
+          height: 2px;
+          width: 100%;
+        }
+  
+        &:hover, &:focus {
+          color: $black;
+          outline: none;
+        }
+  
+        &.active {
+          color: $black;
+          
+          &::after {
+            opacity: 1;
+          }
         }
       }
     }
 
     .new-profile {
       color: #aaa;
+      white-space: nowrap;
 
       &::before {
         content: "+";
@@ -80,7 +101,7 @@
 .c-Section {
   display: flex;
   flex: 1 1 25%;
-  min-width: 330px;
+  min-width: 300px;
   margin: 10px;
   flex-direction: column;
   justify-content: flex-start;

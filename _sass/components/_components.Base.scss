@@ -13,7 +13,7 @@ button {
   cursor: pointer;
   border: unset;
   border-radius: 22px;
-  background-color: $button;
+  background-color: white;
 
 
   &:hover {
@@ -21,34 +21,23 @@ button {
   }
 
   &.button {
-    &--submit, &--back, &--reset {
+    &--create, &--cancel {
       height: 45px;
     }
 
-    &--submit {
+    &--create {
       color: white;
       width: 100%;
-      margin-top: 40px;
       background-color: rgba(var(--primary), 0.9);
-  
-      &:disabled {
-        opacity: 0.3;
-        pointer-events: none;
-        cursor: unset;
-      }
 
       &:hover {
         background-color: $primary;
       }
     }
 
-    &--back {
-      width: 50%;
-    }
-  
-    &--reset {
-      width: 50%;
-      margin-top: 35px;
+    &--cancel {
+      border: 2px solid black;
+      width: 100%;
     }
   }
 }
@@ -95,7 +84,8 @@ input[type='checkbox']:checked + span:after {
   -webkit-transform: rotate(45deg);
   -ms-transform: rotate(45deg);
   transform: rotate(45deg);
-  left: -13px;
+  left: -15px;
+  margin-top: 1px;
 }
 
 input[type='checkbox'] + span:before {
@@ -107,5 +97,6 @@ input[type='checkbox'] + span:before {
   position: absolute;
   top: 1px;
   border-radius: 3px;
-  left: -18px;
+  left: -20px;
+  margin-top: 1px;
 }

@@ -4,7 +4,7 @@
     padding-bottom: 15px;
     padding-right: 20px;
 
-    @media(max-width: 960px) {
+    @media(max-width: $large) {
       padding-right: unset;
       justify-content: center;
       width: 100%;
